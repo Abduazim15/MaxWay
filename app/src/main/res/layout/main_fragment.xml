@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_gravity="bottom"
             android:id="@+id/search"
-            android:background="@drawable/purple_square"
+            android:background="@drawable/white_square"
             android:backgroundTint="#F8F6FA"
             android:layout_height="40dp"
             android:orientation="horizontal" />
@@ -34,14 +34,13 @@
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/top"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="380dp"
-        android:layout_height="600dp"
-        app:spanCount="2"
-        android:layout_marginLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:listitem="@layout/food_item"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/foods_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/tab"
         />
 
