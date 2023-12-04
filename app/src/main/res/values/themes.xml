@@ -4,6 +4,7 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">#51267D</item>
+        <item name="colorSecondary">#E7E9E8</item>
 
     </style>
 
