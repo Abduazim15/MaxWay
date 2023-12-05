@@ -16,6 +16,6 @@ class SplashFragment : Fragment(R.layout.splash_fragment) {
             override fun onFinish() {
                 parentFragmentManager.beginTransaction().replace(R.id.container, MainFragment()).commit()
             }
-        }
+        }.start()
     }
 }
