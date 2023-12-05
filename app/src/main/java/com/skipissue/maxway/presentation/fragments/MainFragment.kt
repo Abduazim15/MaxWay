@@ -26,7 +26,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 FoodEntity(1, "Burger", "25000"),
                 FoodEntity(2, "Cheese Burger", "28000"),
                 FoodEntity(3, "Max Burger", "20000"),
-                FoodEntity(4, "Max Cheese Burger", "35000"),
             )),
             CategoryEntity(2, "Hot-Dog", listOf(
                 FoodEntity(1, "Burger", "25000"),
