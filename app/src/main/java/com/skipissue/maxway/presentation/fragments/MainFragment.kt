@@ -1,9 +1,11 @@
 package com.skipissue.maxway.presentation.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.skipissue.maxway.R
 import com.skipissue.maxway.databinding.MainFragmentBinding
 import com.skipissue.maxway.domain.entity.CategoryEntity
@@ -15,6 +17,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private val adapter by lazy { CategoriesAdapter() }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.recycler.adapter = adapter
+        requireActivity().window.statusBarColor = Color.WHITE
         adapter.submitList(listOf(
             CategoryEntity(0, "Burgers", listOf(
                 FoodEntity(1, "Burger", "25000"),
@@ -34,5 +37,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 FoodEntity(4, "Max Cheese Burger", "35000"),
             )),
         ))
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.VISIBLE
     }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main"
+        android:title="Main"
+        android:icon="@drawable/logo"/>
+    <item
+        android:id="@+id/basket"
+        android:title="Basket"
+        android:icon="@drawable/logo"/>
+    <item
+        android:id="@+id/my_orders"
+        android:title="My Orders"
+        android:icon="@drawable/logo"/>
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/logo"/>
+</menu>
