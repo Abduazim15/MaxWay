@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
         binding.bottom.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.main -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment()).commit()}
-                R.id.basket -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment()).commit()}
-                R.id.my_orders -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment()).commit()}
-                R.id.profile -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment()).commit()}
+                R.id.basket -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment())}
+                R.id.my_orders -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment())}
+                R.id.profile -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment())}
             }
             return@setOnItemSelectedListener true
         }
