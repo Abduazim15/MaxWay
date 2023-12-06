@@ -104,7 +104,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                         if (isUserScrolling) {
                             val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
                             if (firstVisibleItemPosition != RecyclerView.NO_POSITION) {
-                                Handler().postDelayed({tabAdapter.select(firstVisibleItemPosition)}, 300)
+                                tabAdapter.select(firstVisibleItemPosition)
                             }
                         }
                         isUserScrolling = false
