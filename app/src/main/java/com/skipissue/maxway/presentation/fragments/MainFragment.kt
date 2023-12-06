@@ -4,12 +4,14 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,24 +27,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private val binding: MainFragmentBinding by viewBinding()
     private val adapter by lazy { CategoriesAdapter() }
     private val rootView by lazy { requireView() }
-    private val tabAdapter by lazy { TabsAdapter() }
+    private val tabs by lazy { ArrayList<TabEntity>()}
+    private val tabAdapter by lazy { TabsAdapter(tabs) }
+    private var isUserScrolling = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requireActivity().window.statusBarColor = Color.WHITE
-        binding.apply {
-            tab.adapter = tabAdapter
-            recycler.adapter = adapter
-            search.addTextChangedListener { text ->
-                if (text?.toString().isNullOrEmpty())
-                    clear.visibility = View.INVISIBLE
-                else if (clear.visibility == View.INVISIBLE)
-                    clear.visibility = View.VISIBLE
-                else {
-                }
-            }
-            clear.setOnClickListener {
-                search.setText("")
-            }
-        }
         adapter.submitList(
             listOf(
                 CategoryEntity(
@@ -70,20 +59,59 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 ),
             )
         )
-        tabAdapter.submitList(
+        tabs.addAll(
             adapter.currentList.map { it -> TabEntity(it.id, it.name) }
         )
-
+        binding.apply {
+            tab.adapter = tabAdapter
+            recycler.adapter = adapter
+            search.addTextChangedListener { text ->
+                if (text?.toString().isNullOrEmpty())
+                    clear.visibility = View.INVISIBLE
+                else if (clear.visibility == View.INVISIBLE)
+                    clear.visibility = View.VISIBLE
+                else {
+                }
+            }
+            clear.setOnClickListener {
+                search.setText("")
+            }
+        }
+        val layoutManagerR = LinearLayoutManager(requireContext())
+        binding.recycler.layoutManager = layoutManagerR
+        val smoothScroller = object : LinearSmoothScroller(requireContext()) {
+            override fun getVerticalSnapPreference(): Int {
+                return SNAP_TO_START
+            }
+        }
+        tabAdapter.setOnClickClickListener { index ->
+            if (index == tabAdapter.list.size-1) {
+                binding.recycler.smoothScrollToPosition(index)
+                isUserScrolling = false
+            }
+            else {
+                smoothScroller.targetPosition = index
+                layoutManagerR.startSmoothScroll(smoothScroller)
+            }
+        }
         val layoutManager = binding.recycler.layoutManager as LinearLayoutManager
         binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
 
-                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
-
-                if (firstVisibleItemPosition != null) {
-
+                when (newState) {
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+                        if (isUserScrolling) {
+                            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+                            if (firstVisibleItemPosition != RecyclerView.NO_POSITION) {
+                                Handler().postDelayed({tabAdapter.select(firstVisibleItemPosition)}, 300)
+                            }
+                        }
+                        isUserScrolling = false
+                    }
+                    RecyclerView.SCROLL_STATE_DRAGGING, RecyclerView.SCROLL_STATE_SETTLING -> {
+                        isUserScrolling = true
+                    }
                 }
             }
         })
