@@ -12,7 +12,7 @@ import com.skipissue.maxway.domain.entity.TabEntity
 
 class TabsAdapter(val list: List<TabEntity>) : RecyclerView.Adapter<TabsAdapter.TabViewHolder>() {
     private var onClickListener: ((Int) -> Unit)? = null
-    var selectedItemPosition = RecyclerView.NO_POSITION
+    var selectedItemPosition = 0
     fun setOnClickClickListener(clickListener: (Int) -> Unit) {
         onClickListener = clickListener
     }
