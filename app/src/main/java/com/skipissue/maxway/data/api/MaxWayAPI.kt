@@ -10,5 +10,5 @@ interface MaxWayAPI {
     suspend fun getProducts() : Response<ProductsResponse>
 
     @GET("v1/core/get/product-detail/ed7654f9-a6e5-45a9-b8a0-9f150610cc74/?format=json")
-    suspend fun getProductsWith() : Response<ProductsDetailResponse>
+    suspend fun getProductsWithDetail() : Response<ProductsDetailResponse>
 }
