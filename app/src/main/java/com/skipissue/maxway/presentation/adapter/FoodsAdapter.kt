@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -48,11 +49,13 @@ class FoodsViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) :
     private val name: TextView = view.findViewById(R.id.name)
     private val cost: TextView = view.findViewById(R.id.cost)
     private val description: TextView = view.findViewById(R.id.description)
+    private val image: ImageView = view.findViewById(R.id.image)
 
     fun bind(food: Product) {
         cost.setText("${food.out_price} ${food.currency}")
         name.setText(food.title.uz)
         description.setText(food.description.uz)
+
         layout.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
         }
