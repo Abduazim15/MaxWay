@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.skipissue.maxway.R
-import com.skipissue.maxway.domain.entity.CategoryEntity
+import com.skipissue.maxway.domain.entity.responses.Category
 
-class CategoriesAdapter : ListAdapter<CategoryEntity, CategoryViewHolder>(CharacterComparator) {
+class CategoriesAdapter : ListAdapter<Category, CategoryViewHolder>(CharacterComparator) {
     private var onClickListener: ((Int) -> Unit)? = null
     fun setOnClickClickListener(clickListener: (Int) -> Unit) {
         onClickListener = clickListener
@@ -29,13 +29,13 @@ class CategoriesAdapter : ListAdapter<CategoryEntity, CategoryViewHolder>(Charac
         character?.let { holder.bind(it) }
     }
 
-    object CharacterComparator : DiffUtil.ItemCallback<CategoryEntity>() {
-        override fun areItemsTheSame(oldItem: CategoryEntity, newItem: CategoryEntity): Boolean {
+    object CharacterComparator : DiffUtil.ItemCallback<Category>() {
+        override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: CategoryEntity, newItem: CategoryEntity): Boolean {
+        override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
             return oldItem == newItem
         }
     }
@@ -47,10 +47,10 @@ class CategoryViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) 
     private val foodsRecycler: RecyclerView = view.findViewById(R.id.foods_recycler)
     private val layout: LinearLayout = view.findViewById(R.id.layout)
     private val adapter by lazy { FoodsAdapter() }
-    fun bind(category: CategoryEntity) {
-        nameCat.text = category.name
+    fun bind(category: Category) {
+        nameCat.text = category.title.uz
         foodsRecycler.adapter = adapter
-        adapter.submitList(category.data)
+        adapter.submitList(category.products)
         layout.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
         }

@@ -1,6 +1,6 @@
 package com.skipissue.maxway.domain.entity
 
 class TabEntity(
-    val id: Int,
+    val id: String,
     val title: String
 )

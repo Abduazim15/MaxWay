@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.skipissue.maxway.R
-import com.skipissue.maxway.domain.entity.FoodEntity
+import com.skipissue.maxway.domain.entity.responses.Product
 
 
-class FoodsAdapter : ListAdapter<FoodEntity, FoodsViewHolder>(CharacterComparator) {
+class FoodsAdapter : ListAdapter<Product, FoodsViewHolder>(CharacterComparator) {
     private var onClickListener: ((Int) -> Unit)? = null
     fun setOnClickClickListener(clickListener: (Int) -> Unit) {
         onClickListener = clickListener
@@ -30,13 +30,13 @@ class FoodsAdapter : ListAdapter<FoodEntity, FoodsViewHolder>(CharacterComparato
         character?.let { holder.bind(it) }
     }
 
-    object CharacterComparator : DiffUtil.ItemCallback<FoodEntity>() {
-        override fun areItemsTheSame(oldItem: FoodEntity, newItem: FoodEntity): Boolean {
+    object CharacterComparator : DiffUtil.ItemCallback<Product>() {
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: FoodEntity, newItem: FoodEntity): Boolean {
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
         }
     }
@@ -47,10 +47,12 @@ class FoodsViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) :
     val layout : LinearLayout = view.findViewById(R.id.item)
     private val name: TextView = view.findViewById(R.id.name)
     private val cost: TextView = view.findViewById(R.id.cost)
+    private val description: TextView = view.findViewById(R.id.description)
 
-    fun bind(food: FoodEntity) {
-        cost.setText("${food.cost} So'm")
-        name.setText(food.name)
+    fun bind(food: Product) {
+        cost.setText("${food.out_price} ${food.currency}")
+        name.setText(food.title.uz)
+        description.setText(food.description.uz)
         layout.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
         }

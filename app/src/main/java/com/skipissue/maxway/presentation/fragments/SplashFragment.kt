@@ -13,7 +13,7 @@ class SplashFragment : Fragment(R.layout.splash_fragment) {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requireActivity().window.statusBarColor = resources.getColor(R.color.primary, null)
-        object : CountDownTimer(1000, 2000){
+        object : CountDownTimer(1000, 1000){
             override fun onTick(p0: Long) {
 
             }

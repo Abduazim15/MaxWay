@@ -56,6 +56,10 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.48"
     kapt "com.google.dagger:hilt-compiler:2.48"
 
+    def fragment_version = "1.6.1"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
 }
 kapt {
     correctErrorTypes true
