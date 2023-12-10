@@ -40,6 +40,7 @@
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:paddingTop="10dp"
+        android:orientation="vertical"
         android:paddingHorizontal="12dp"
         android:layout_height="match_parent">
         <TextView
@@ -50,8 +51,75 @@
             android:text="Max Burger"
             android:textColor="@color/black"
             android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/description"
+            android:text="Закручен со вкусом! Кусочки нежнейшего куриногофиле в хрустящей остерой чили оригинальнойпанировке с сочными листьями салата, кусочкамипомидора и нежным соусом мы завернули впшеничную лепешку и поджарили в тостере"
+            android:textColor="#818C99"
+            android:textStyle="bold"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_height="44dp">
+            <ImageView
+                android:layout_width="44dp"
+                android:id="@+id/inc"
+                android:layout_height="match_parent"
+                android:src="@drawable/minus"/>
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1"
+                android:id="@+id/amount"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="44dp"
+                android:id="@+id/dec"
+                android:layout_height="match_parent"
+                android:src="@drawable/plus"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:paddingHorizontal="10dp"
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
 
-
+                android:background="@drawable/purple_square">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Add"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="25 000 UZS"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>
