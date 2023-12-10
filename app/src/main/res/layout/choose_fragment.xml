@@ -70,7 +70,7 @@
             android:layout_height="44dp">
             <ImageView
                 android:layout_width="44dp"
-                android:id="@+id/inc"
+                android:id="@+id/dec"
                 android:layout_height="match_parent"
                 android:src="@drawable/minus"/>
             <TextView
@@ -84,7 +84,7 @@
                 android:textStyle="bold"/>
             <ImageView
                 android:layout_width="44dp"
-                android:id="@+id/dec"
+                android:id="@+id/inc"
                 android:layout_height="match_parent"
                 android:src="@drawable/plus"/>
             <Space
