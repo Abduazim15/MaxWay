@@ -51,8 +51,8 @@ class CategoryViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) 
         nameCat.text = category.title.uz
         foodsRecycler.adapter = adapter
         adapter.submitList(category.products)
-        layout.setOnClickListener {
-            onItemClickListener?.invoke(bindingAdapterPosition)
+        adapter.setOnClickClickListener {index ->
+            onItemClickListener?.invoke(index)
         }
     }
 }

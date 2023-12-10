@@ -1,17 +1,13 @@
 package com.skipissue.maxway.presentation.fragments
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
@@ -19,14 +15,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.skipissue.maxway.R
 import com.skipissue.maxway.databinding.MainFragmentBinding
-import com.skipissue.maxway.domain.entity.CategoryEntity
-import com.skipissue.maxway.domain.entity.FoodEntity
 import com.skipissue.maxway.domain.entity.TabEntity
 import com.skipissue.maxway.presentation.adapter.CategoriesAdapter
 import com.skipissue.maxway.presentation.adapter.TabsAdapter
 import com.skipissue.maxway.presentation.viewmodels.ProductsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -93,7 +86,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 }
             })
         }
-
+        adapter.setOnClickClickListener { index ->
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.GONE
+            parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, ChooseFragment()).commit()
+        }
         tabAdapter.setOnClickClickListener { index ->
             if (index == tabAdapter.list.size-1) {
                 binding.recycler.smoothScrollToPosition(index)
@@ -105,22 +101,22 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
         }
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.VISIBLE
-        rootView.viewTreeObserver.addOnGlobalLayoutListener {
-            val rect = Rect()
-            rootView.getWindowVisibleDisplayFrame(rect)
-            val screenHeight = rootView.rootView.height
-            val keypadHeight = screenHeight - rect.bottom
-            val isKeyboardVisible = keypadHeight > screenHeight * 0.15
-
-            if (isKeyboardVisible) {
-                // Keyboard is open
-                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility =
-                    View.GONE
-            } else {
-                // Keyboard is closed
-                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility =
-                    View.VISIBLE
-            }
-        }
+//        rootView.viewTreeObserver.addOnGlobalLayoutListener {
+//            val rect = Rect()
+//            rootView.getWindowVisibleDisplayFrame(rect)
+//            val screenHeight = rootView.rootView.height
+//            val keypadHeight = screenHeight - rect.bottom
+//            val isKeyboardVisible = keypadHeight > screenHeight * 0.15
+//
+//            if (isKeyboardVisible) {
+//                // Keyboard is open
+//                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility =
+//                    View.GONE
+//            } else {
+//                // Keyboard is closed
+//                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility =
+//                    View.VISIBLE
+//            }
+//        }
     }
 }
