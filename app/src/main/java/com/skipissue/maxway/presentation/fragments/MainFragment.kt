@@ -86,10 +86,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 }
             })
         }
-        adapter.setOnClickClickListener { index ->
+        adapter.setOnClickClickListener { cIndex, index ->
             requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.GONE
             parentFragmentManager.beginTransaction().setReorderingAllowed(true).addToBackStack("MainFragment").replace(R.id.container, ChooseFragment::class.java, bundleOf(
-                "id" to adapter.currentList[index].products[0].id
+                "id" to adapter.currentList[cIndex].products[index].id
             )).commit()
         }
         tabAdapter.setOnClickClickListener { index ->

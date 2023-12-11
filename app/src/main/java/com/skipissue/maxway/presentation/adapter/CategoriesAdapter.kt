@@ -13,8 +13,8 @@ import com.skipissue.maxway.R
 import com.skipissue.maxway.domain.entity.responses.Category
 
 class CategoriesAdapter : ListAdapter<Category, CategoryViewHolder>(CharacterComparator) {
-    private var onClickListener: ((Int) -> Unit)? = null
-    fun setOnClickClickListener(clickListener: (Int) -> Unit) {
+    private var onClickListener: ((Int,Int) -> Unit)? = null
+    fun setOnClickClickListener(clickListener: (Int,Int) -> Unit) {
         onClickListener = clickListener
     }
 
@@ -41,7 +41,7 @@ class CategoriesAdapter : ListAdapter<Category, CategoryViewHolder>(CharacterCom
     }
 }
 
-class CategoryViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) :
+class CategoryViewHolder(view: View, val onItemClickListener: ((Int,Int ) -> Unit)?) :
     RecyclerView.ViewHolder(view) {
     private val nameCat: TextView = view.findViewById(R.id.nameCat)
     private val foodsRecycler: RecyclerView = view.findViewById(R.id.foods_recycler)
@@ -52,7 +52,7 @@ class CategoryViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) 
         foodsRecycler.adapter = adapter
         adapter.submitList(category.products)
         adapter.setOnClickClickListener {index ->
-            onItemClickListener?.invoke(index)
+            onItemClickListener?.invoke(bindingAdapterPosition,index)
         }
     }
 }
