@@ -62,6 +62,8 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.8'
 
+    implementation 'com.yandex.android:maps.mobile:4.4.0-lite'
+
 }
 kapt {
     correctErrorTypes true
