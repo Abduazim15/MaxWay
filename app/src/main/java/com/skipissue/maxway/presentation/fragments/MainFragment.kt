@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,7 +32,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private val tabAdapter by lazy { TabsAdapter(tabs) }
     private var isUserScrolling = false
     private val viewModel: ProductsViewModel by viewModels()
-    private val layoutManagerR by lazy {  LinearLayoutManager(requireContext())}
     private val smoothScroller by lazy {object : LinearSmoothScroller(requireContext()) {
         override fun getVerticalSnapPreference(): Int {
             return SNAP_TO_START
@@ -49,6 +49,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 tabAdapter.notifyDataSetChanged()
             }
         }
+        val layoutManagerR = LinearLayoutManager(requireContext())
         binding.apply {
             tab.adapter = tabAdapter
             recycler.adapter = adapter
@@ -58,8 +59,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                     clear.visibility = View.INVISIBLE
                 else if (clear.visibility == View.INVISIBLE)
                     clear.visibility = View.VISIBLE
-                else {
-                }
             }
             clear.setOnClickListener {
                 search.setText("")
@@ -88,7 +87,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         }
         adapter.setOnClickClickListener { index ->
             requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.GONE
-            parentFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, ChooseFragment()).commit()
+            parentFragmentManager.beginTransaction().setReorderingAllowed(true).addToBackStack("MainFragment").replace(R.id.container, ChooseFragment::class.java, bundleOf(
+                "id" to adapter.currentList[index].products[0].id
+            )).commit()
         }
         tabAdapter.setOnClickClickListener { index ->
             if (index == tabAdapter.list.size-1) {
@@ -101,22 +102,5 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
         }
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.VISIBLE
-//        rootView.viewTreeObserver.addOnGlobalLayoutListener {
-//            val rect = Rect()
-//            rootView.getWindowVisibleDisplayFrame(rect)
-//            val screenHeight = rootView.rootView.height
-//            val keypadHeight = screenHeight - rect.bottom
-//            val isKeyboardVisible = keypadHeight > screenHeight * 0.15
-//
-//            if (isKeyboardVisible) {
-//                // Keyboard is open
-//                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility =
-//                    View.GONE
-//            } else {
-//                // Keyboard is closed
-//                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility =
-//                    View.VISIBLE
-//            }
-//        }
     }
 }

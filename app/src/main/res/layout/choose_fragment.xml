@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="?colorSecondary"
     android:orientation="vertical"
     android:layout_height="match_parent">
@@ -18,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Burgers"
+            tools:text="Burgers"
             android:layout_gravity="center"
             android:textSize="17sp"
             android:id="@+id/title"
@@ -29,9 +30,10 @@
         android:layout_width="match_parent"
         android:layout_height="325dp">
         <ImageView
-            android:layout_width="214dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/burger"
+            android:scaleType="fitXY"
             android:layout_gravity="center"
             android:id="@+id/image"/>
     </FrameLayout>
@@ -48,7 +50,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:id="@+id/name"
-            android:text="Max Burger"
+            tools:text="Max Burger"
             android:textColor="@color/black"
             android:textStyle="bold"/>
         <TextView
@@ -57,7 +59,7 @@
             android:textSize="17sp"
             android:layout_marginTop="10dp"
             android:id="@+id/description"
-            android:text="Закручен со вкусом! Кусочки нежнейшего куриногофиле в хрустящей остерой чили оригинальнойпанировке с сочными листьями салата, кусочкамипомидора и нежным соусом мы завернули впшеничную лепешку и поджарили в тостере"
+            tools:text="Закручен со вкусом! Кусочки нежнейшего куриногофиле в хрустящей остерой чили оригинальнойпанировке с сочными листьями салата, кусочкамипомидора и нежным соусом мы завернули впшеничную лепешку и поджарили в тостере"
             android:textColor="#818C99"
             android:textStyle="bold"/>
         <Space

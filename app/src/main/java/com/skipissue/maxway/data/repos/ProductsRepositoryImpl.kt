@@ -11,7 +11,7 @@ class ProductsRepositoryImpl @Inject constructor(private val dataSource: Product
         return dataSource.getProducts()
     }
 
-    override suspend fun getProductsWithDetail(): Response<ProductsDetailResponse> {
-        return dataSource.getProductsWithDetail()
+    override suspend fun getProductsWithDetail(id: String): Response<ProductsDetailResponse> {
+        return dataSource.getProductsWithDetail(id)
     }
 }

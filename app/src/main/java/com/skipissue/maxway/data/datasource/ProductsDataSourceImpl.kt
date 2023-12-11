@@ -12,7 +12,7 @@ class ProductsDataSourceImpl @Inject constructor(private val maxWayAPI: MaxWayAP
         return maxWayAPI.getProducts()
     }
 
-    override suspend fun getProductsWithDetail(): Response<ProductsDetailResponse> {
-        return maxWayAPI.getProductsWithDetail()
+    override suspend fun getProductsWithDetail(id: String): Response<ProductsDetailResponse> {
+        return maxWayAPI.getProductsWithDetail(id)
     }
 }

@@ -7,5 +7,5 @@ import retrofit2.Response
 
 interface ProductsDataSource{
     suspend fun getProducts(): Response<ProductsResponse>
-    suspend fun getProductsWithDetail(): Response<ProductsDetailResponse>
+    suspend fun getProductsWithDetail(id: String): Response<ProductsDetailResponse>
 }

@@ -13,7 +13,6 @@ class GetProductsUseCase @Inject constructor(private val repository: ProductsRep
             return State.Success(repository.getProducts().body())
         } catch (e: Exception) {
             e.printStackTrace()
-            throw e
             if (e is IOException) return State.NoNetwork
             return State.Error(1)
         }

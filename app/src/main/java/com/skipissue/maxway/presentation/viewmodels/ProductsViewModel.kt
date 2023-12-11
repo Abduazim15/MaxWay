@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.skipissue.maxway.data.constants.State
 import com.skipissue.maxway.domain.GetProductsUseCase
 import com.skipissue.maxway.domain.GetProductsWithDetailUseCase
+import com.skipissue.maxway.domain.entity.responses.ProductsDetailResponse
 import com.skipissue.maxway.domain.entity.responses.ProductsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,6 +18,9 @@ import javax.inject.Inject
 class ProductsViewModel @Inject constructor(private val getProducts: GetProductsUseCase, private val getProductWithD: GetProductsWithDetailUseCase): ViewModel() {
     private val _successFlow = MutableSharedFlow<ProductsResponse>()
     val stateSuccess : SharedFlow<ProductsResponse> = _successFlow
+
+    private val _successDFlow = MutableSharedFlow<ProductsDetailResponse>()
+    val stateSuccessD : SharedFlow<ProductsDetailResponse> = _successDFlow
 
     private val _errorFlow= MutableSharedFlow<Int>()
     val errorFlow:SharedFlow<Int> = _errorFlow
@@ -32,10 +36,13 @@ class ProductsViewModel @Inject constructor(private val getProducts: GetProducts
             handleState(state)
         }
     }
-    fun getProductsWithDetails(){
+    fun getProductWithDetails(id: String){
         viewModelScope.launch {
-            val state = getProductWithD.invoke()
-            handleState(state)
+            when(val state = getProductWithD.invoke(id)){
+                is State.Error -> _errorFlow.emit(state.code)
+                State.NoNetwork -> _networkFlow.emit(Unit)
+                is State.Success<*> -> _successDFlow.emit(state.data as ProductsDetailResponse)
+            }
         }
     }
     private suspend fun handleState(state: State) {
