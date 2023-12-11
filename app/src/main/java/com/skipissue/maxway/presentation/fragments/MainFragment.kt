@@ -74,6 +74,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
                                 if (firstVisibleItemPosition != RecyclerView.NO_POSITION) {
                                     tabAdapter.select(firstVisibleItemPosition)
+                                    binding.tab.smoothScrollToPosition(firstVisibleItemPosition)
                                 }
                             }
                             isUserScrolling = false
