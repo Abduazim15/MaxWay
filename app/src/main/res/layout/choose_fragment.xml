@@ -1,124 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="?colorSecondary"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@color/white">
+
         <ImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/back"
-            android:layout_marginLeft="12dp"
             android:layout_gravity="center_vertical"
-            android:id="@+id/back"/>
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/back" />
+
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Burgers"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:textSize="17sp"
-            android:id="@+id/title"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            tools:text="Burgers" />
     </FrameLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="325dp">
+
         <ImageView
+            android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/burger"
-            android:scaleType="fitXY"
             android:layout_gravity="center"
-            android:id="@+id/image"/>
+            android:scaleType="fitXY"
+            />
     </FrameLayout>
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/white_square"
         android:backgroundTint="@color/white"
-        android:layout_width="match_parent"
-        android:paddingTop="10dp"
         android:orientation="vertical"
         android:paddingHorizontal="12dp"
-        android:layout_height="match_parent">
+        android:paddingTop="10dp">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
             android:id="@+id/name"
-            tools:text="Max Burger"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Max Burger" />
+
+        <TextView
             android:id="@+id/description"
-            tools:text="Закручен со вкусом! Кусочки нежнейшего куриногофиле в хрустящей остерой чили оригинальнойпанировке с сочными листьями салата, кусочкамипомидора и нежным соусом мы завернули впшеничную лепешку и поджарили в тостере"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textColor="#818C99"
-            android:textStyle="bold"/>
+            android:textSize="17sp"
+            android:textStyle="bold"
+            tools:text="Закручен со вкусом! Кусочки нежнейшего куриногофиле в хрустящей остерой чили оригинальнойпанировке с сочными листьями салата, кусочкамипомидора и нежным соусом мы завернули впшеничную лепешку и поджарили в тостере" />
+
         <Space
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginBottom="20dp"
-            android:layout_height="44dp">
+            android:layout_height="44dp"
+            android:layout_marginBottom="20dp">
+
             <ImageView
-                android:layout_width="44dp"
                 android:id="@+id/dec"
+                android:layout_width="44dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/minus"/>
+                android:src="@drawable/minus" />
+
             <TextView
+                android:id="@+id/amount"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="1"
-                android:id="@+id/amount"
-                android:textSize="15sp"
                 android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
             <ImageView
-                android:layout_width="44dp"
                 android:id="@+id/inc"
+                android:layout_width="44dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/plus"/>
+                android:src="@drawable/plus" />
+
             <Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <LinearLayout
-                android:paddingHorizontal="10dp"
                 android:id="@+id/add"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:background="@drawable/purple_square"
 
-                android:background="@drawable/purple_square">
+                android:paddingHorizontal="10dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Add"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
                 <Space
                     android:layout_width="20dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
+
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="25 000 UZS"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="0 UZS"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:id="@+id/sum"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

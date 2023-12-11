@@ -13,6 +13,8 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
+import java.util.Locale
 
 @AndroidEntryPoint
 class ChooseFragment : Fragment(R.layout.choose_fragment) {
@@ -20,6 +22,8 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
     private var counter = 1
     private var id :String? = null
     private val viewModel : ProductsViewModel by viewModels()
+    private var price = 0
+    private val numberFormat = NumberFormat.getInstance(Locale.getDefault())
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         id = arguments?.getString("id")
         viewModel.getProductWithDetails(id!!)
@@ -30,6 +34,14 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
                     name.setText(data.title.uz)
                     title.setText(data.categories[0].title.uz)
                     Picasso.get().load("https://cdn.delever.uz/delever/"+data.image).into(binding.image)
+                    sum.setText("${numberFormat.format(data.out_price)} UZS")
+                    price = data.out_price
+                    back.setOnClickListener {
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                    }
+                    add.setOnClickListener {
+
+                    }
                 }
             }
         }
@@ -38,11 +50,13 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
                 if (counter != 1) {
                     counter--
                     binding.amount.setText(counter.toString())
+                    binding.sum.setText("${numberFormat.format(counter * price)} UZS")
                 }
             }
             inc.setOnClickListener {
                 counter++
                 binding.amount.setText(counter.toString())
+                binding.sum.setText("${numberFormat.format(counter * price)} UZS")
             }
         }
 
