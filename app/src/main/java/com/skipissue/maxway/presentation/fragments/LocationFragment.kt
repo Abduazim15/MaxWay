@@ -1,17 +1,23 @@
 package com.skipissue.maxway.presentation.fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.gms.location.LocationServices
 import com.skipissue.maxway.R
 import com.skipissue.maxway.databinding.LocationFragmentBinding
+import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.location.Location
@@ -19,11 +25,16 @@ import com.yandex.mapkit.location.LocationListener
 import com.yandex.mapkit.location.LocationManager
 import com.yandex.mapkit.location.LocationStatus
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.MapObject
+import com.yandex.mapkit.map.MapObjectCollection
+import com.yandex.mapkit.map.PlacemarkMapObject
 import com.yandex.mapkit.mapview.MapView
+import com.yandex.mapkit.user_location.UserLocationLayer
 
 class LocationFragment : Fragment(R.layout.location_fragment) {
     private val binding: LocationFragmentBinding by viewBinding()
     private lateinit var locationManager: LocationManager
+    private lateinit var userLocationLayer: UserLocationLayer
     private lateinit var mapView: MapView
     override fun onStart() {
         super.onStart()
@@ -37,24 +48,21 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
         super.onStop()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        MapKitFactory.setApiKey("58099092-9143-4132-a9e9-c68efd2ddfbd")
-        MapKitFactory.initialize(requireContext())
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
+    @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requestLocationPermission()
-        locationManager = MapKitFactory.getInstance().createLocationManager()
         mapView = binding.mapView
+        binding.current.setOnClickListener {
+            var fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: android.location.Location? ->
+                if (location != null) {
+                    goToLocation(location.latitude, location.longitude)
+                }
+            }
+        }
     }
     private fun requestLocationPermission() {
         if (ContextCompat.checkSelfPermission(
@@ -62,7 +70,9 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            goToCurrentLocation()
+            goToLocation(41.207608, 69.184516)
+
+
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -70,24 +80,6 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
                 1
             )
         }
-    }
-    private fun goToCurrentLocation() {
-        // Request the user's current location
-        locationManager.requestSingleUpdate(object : LocationListener {
-            override fun onLocationUpdated(location: Location) {
-                // Location update received
-                val latitude = location.position.latitude
-                val longitude = location.position.longitude
-
-                // Go to the current location on the map
-                goToLocation(latitude, longitude)
-            }
-
-            override fun onLocationStatusUpdated(locationStatus: LocationStatus) {
-                // Location status updated
-                // Handle location status changes if needed
-            }
-        })
     }
     private fun goToLocation(latitude: Double, longitude: Double) {
         val map = binding.mapView.map
@@ -99,9 +91,10 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
             0.0f // Specify the desired tilt (camera pitch) here if needed
         )
 
-        // Move the camera to the specified position
         map.move(
-            cameraPosition
+            cameraPosition,
+            Animation(Animation.Type.SMOOTH, 1.5f),
+            null
         )
     }
 }
