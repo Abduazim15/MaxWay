@@ -28,19 +28,22 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private val binding: MainFragmentBinding by viewBinding()
     private val adapter by lazy { CategoriesAdapter() }
     private val rootView by lazy { requireView() }
-    private val tabs by lazy { ArrayList<TabEntity>()}
+    private val tabs by lazy { ArrayList<TabEntity>() }
     private val tabAdapter by lazy { TabsAdapter(tabs) }
     private var isUserScrolling = false
     private val viewModel: ProductsViewModel by viewModels()
-    private val smoothScroller by lazy {object : LinearSmoothScroller(requireContext()) {
-        override fun getVerticalSnapPreference(): Int {
-            return SNAP_TO_START
+    private val smoothScroller by lazy {
+        object : LinearSmoothScroller(requireContext()) {
+            override fun getVerticalSnapPreference(): Int {
+                return SNAP_TO_START
+            }
         }
-    }}
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requireActivity().window.statusBarColor = Color.WHITE
         lifecycleScope.launch {
-            viewModel.stateSuccess.collect{data ->
+            viewModel.stateSuccess.collect { data ->
                 adapter.submitList(data.categories)
                 tabs.clear()
                 tabs.addAll(
@@ -63,6 +66,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             clear.setOnClickListener {
                 search.setText("")
             }
+            locationBar.setOnClickListener {
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.GONE
+                parentFragmentManager.beginTransaction().addToBackStack("MainFragment")
+                    .setReorderingAllowed(true).replace(R.id.container, LocationFragment()).commit()
+            }
             val layoutManager = recycler.layoutManager as LinearLayoutManager
             recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -71,7 +79,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                     when (newState) {
                         RecyclerView.SCROLL_STATE_IDLE -> {
                             if (isUserScrolling) {
-                                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+                                val firstVisibleItemPosition =
+                                    layoutManager.findFirstVisibleItemPosition()
                                 if (firstVisibleItemPosition != RecyclerView.NO_POSITION) {
                                     tabAdapter.select(firstVisibleItemPosition)
                                     binding.tab.smoothScrollToPosition(firstVisibleItemPosition)
@@ -79,6 +88,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                             }
                             isUserScrolling = false
                         }
+
                         RecyclerView.SCROLL_STATE_DRAGGING, RecyclerView.SCROLL_STATE_SETTLING -> {
                             isUserScrolling = true
                         }
@@ -88,16 +98,18 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         }
         adapter.setOnClickClickListener { cIndex, index ->
             requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.GONE
-            parentFragmentManager.beginTransaction().setReorderingAllowed(true).addToBackStack("MainFragment").replace(R.id.container, ChooseFragment::class.java, bundleOf(
-                "id" to adapter.currentList[cIndex].products[index].id
-            )).commit()
+            parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+                .addToBackStack("MainFragment").replace(
+                R.id.container, ChooseFragment::class.java, bundleOf(
+                    "id" to adapter.currentList[cIndex].products[index].id
+                )
+            ).commit()
         }
         tabAdapter.setOnClickClickListener { index ->
-            if (index == tabAdapter.list.size-1) {
+            if (index == tabAdapter.list.size - 1) {
                 binding.recycler.smoothScrollToPosition(index)
                 isUserScrolling = false
-            }
-            else {
+            } else {
                 smoothScroller.targetPosition = index
                 layoutManagerR.startSmoothScroll(smoothScroller)
             }
