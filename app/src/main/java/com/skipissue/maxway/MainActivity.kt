@@ -8,6 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.navigation.NavigationBarView
 import com.skipissue.maxway.databinding.ActivityMainBinding
 import com.skipissue.maxway.presentation.fragments.MainFragment
+import com.skipissue.maxway.presentation.fragments.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.main -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment()).commit()}
                 R.id.basket -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment())}
                 R.id.my_orders -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment())}
-                R.id.profile -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, MainFragment())}
+                R.id.profile -> {supportFragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.container, ProfileFragment()).commit()}
             }
             return@setOnItemSelectedListener true
         }

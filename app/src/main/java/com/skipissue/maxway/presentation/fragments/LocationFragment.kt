@@ -3,13 +3,8 @@ package com.skipissue.maxway.presentation.fragments
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,14 +15,11 @@ import com.skipissue.maxway.databinding.LocationFragmentBinding
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.location.Location
-import com.yandex.mapkit.location.LocationListener
 import com.yandex.mapkit.location.LocationManager
-import com.yandex.mapkit.location.LocationStatus
+import com.yandex.mapkit.map.CameraListener
 import com.yandex.mapkit.map.CameraPosition
-import com.yandex.mapkit.map.MapObject
-import com.yandex.mapkit.map.MapObjectCollection
-import com.yandex.mapkit.map.PlacemarkMapObject
+import com.yandex.mapkit.map.CameraUpdateReason
+import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.mapkit.user_location.UserLocationLayer
 
@@ -49,13 +41,28 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
     }
 
 
-
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requestLocationPermission()
         mapView = binding.mapView
+        mapView.map.addCameraListener(object : CameraListener {
+            override fun onCameraPositionChanged(
+                p0: Map,
+                p1: CameraPosition,
+                p2: CameraUpdateReason,
+                p3: Boolean
+            ) {
+                if (p3) {
+                    val target = p1.target
+                    val point = Point(target.latitude, target.longitude)
+                }
+            }
+
+
+        })
         binding.current.setOnClickListener {
-            var fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+            var fusedLocationClient =
+                LocationServices.getFusedLocationProviderClient(requireActivity())
 
             fusedLocationClient.lastLocation.addOnSuccessListener { location: android.location.Location? ->
                 if (location != null) {
@@ -64,6 +71,7 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
             }
         }
     }
+
     private fun requestLocationPermission() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -81,6 +89,7 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
             )
         }
     }
+
     private fun goToLocation(latitude: Double, longitude: Double) {
         val map = binding.mapView.map
         map.isRotateGesturesEnabled = false // Disable rotation of the map if desired
