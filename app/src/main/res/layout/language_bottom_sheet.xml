@@ -1,97 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Til"
         android:layout_marginLeft="10dp"
-        android:fontFamily="@font/sf_pro_display"
-        android:textSize="22sp"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"/>
+        android:fontFamily="@font/sf_pro_display"
+        android:text="Til"
+        android:textColor="@color/black"
+        android:textSize="22sp" />
+
     <LinearLayout
+        android:id="@+id/rus"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:paddingHorizontal="15dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="10dp">
+        android:paddingHorizontal="15dp">
+
         <ImageView
             android:layout_width="32dp"
-            android:src="@drawable/rus"
-            android:layout_height="32dp"/>
+            android:layout_height="32dp"
+            android:src="@drawable/rus" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/sf_pro_display"
             android:text="Rus tili"
-            android:textSize="15sp"
-            android:fontFamily="@font/sf_pro_display"/>
+            android:textSize="15sp" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:src="@drawable/check"/>
+            android:src="@drawable/check"
+            android:id="@+id/rusTick"
+            android:visibility="invisible" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/uzb"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:paddingHorizontal="15dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="10dp">
+        android:paddingHorizontal="15dp">
+
         <ImageView
             android:layout_width="32dp"
-            android:src="@drawable/uzb"
-            android:layout_height="32dp"/>
+            android:layout_height="32dp"
+            android:src="@drawable/uzb" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/sf_pro_display"
             android:text="O'zbek tili"
-            android:textSize="15sp"
-            android:fontFamily="@font/sf_pro_display"/>
+            android:textSize="15sp" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <ImageView
+            android:id="@+id/uzbTick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/check"/>
+            android:src="@drawable/check" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/eng"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:paddingHorizontal="15dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="10dp">
+        android:paddingHorizontal="15dp">
+
         <ImageView
             android:layout_width="32dp"
-            android:src="@drawable/eng"
-            android:layout_height="32dp"/>
+            android:layout_height="32dp"
+            android:src="@drawable/eng" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/sf_pro_display"
             android:text="Ingliz tili"
-            android:textSize="15sp"
-            android:fontFamily="@font/sf_pro_display"/>
+            android:textSize="15sp" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:src="@drawable/check"/>
+            android:id="@+id/engTick"
+            android:src="@drawable/check"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </LinearLayout>
