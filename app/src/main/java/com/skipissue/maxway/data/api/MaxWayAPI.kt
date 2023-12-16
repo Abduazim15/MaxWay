@@ -23,33 +23,9 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MaxWayAPI {
-    @GET("v1/core/get/category-with-products/")
+    @GET("api/v1/core/get/category-with-products/")
     suspend fun getProducts() : Response<ProductsResponse>
 
-    @GET("v1/core/get/product-detail/{id}/?format=json")
+    @GET("api/v1/core/get/product-detail/{id}/?format=json")
     suspend fun getProductsWithDetail(@Path("id") id: String) : Response<ProductsDetailResponse>
-    @POST("v1/customers/phone")
-    suspend fun checkRegister(@Header("Shipper") shipper : String,@Body phone: String) : Response<CheckRegister>
-
-    @GET("v1/branches?limit=100")
-    suspend fun getFillials(@Header("Shipper") shipper : String) : Response<FillialsResponse>
-    @GET("v1/customer-profile")
-    suspend fun getProfile(@Header("Authorization") token : String) : Response<ProfileResponse>
-    @GET("v1/customers/{USER-ID}/orders")
-    suspend fun getOrderHistory(@Header("Authorization") token : String,@Path("USER-ID") userId: String) : Response<OrderHistoryResponse>
-    @GET("v2/modifier")
-    suspend fun getProductDetail(@Header("Authorization") token : String,@Query("product_id") productId: String) : Response<ProductDetailResponse>
-     @GET("v2/product-favourites")
-    suspend fun getProductSuggestion(@Header("Authorization") token : String,@Query("product_ids") productId: String) : Response<ProductSuggestionResponse>
-    @POST("v1/customers/register")
-    suspend fun register(@Header("Shipper") shipper : String,@Body phone: String) : Response<RegisterResponse>
-    @POST("v1/customers/login")
-    suspend fun login(@Header("Shipper") shipper : String,@Body phone: String) : Response<RegisterResponse>
-    @POST("v1/customers/register-confirm")
-    suspend fun registerConfirm(@Header("Shipper") shipper : String,@Body entity: RegisterConfirmEntity) : Response<RegisterConfirmResponse>
-    @POST("v1/customers/confirm-login")
-    suspend fun loginConfirm(@Header("Shipper") shipper : String,@Body entity: RegisterConfirmEntity) : Response<RegisterConfirmResponse>
-    @PUT("v1/customers/{userId}")
-    suspend fun updateUser(@Path("userId") userId: String,@Header("Authorization") token : String, @Body entity: UpdateEntity): Response<UpdateResponse>
-
 }

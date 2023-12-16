@@ -1,6 +1,7 @@
 package com.skipissue.maxway.data.settings
 
 import android.content.Context
+import com.skipissue.maxway.data.constants.Languages
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -22,4 +23,11 @@ class SettingsImpl @Inject constructor(@ApplicationContext context: Context,
     override var shipperId: String?
         get() =preferences.getString("shipper", null)
         set(value) {preferences.edit().putString("shipper", value).apply()}
+    override var location: String?
+        get() =preferences.getString("location", null)
+        set(value) {preferences.edit().putString("location", value).apply()}
+    override var language: Int?
+        get() = preferences.getInt("language", 0)
+        set(value) {preferences.edit().putInt("language", value!!).apply()}
+
 }

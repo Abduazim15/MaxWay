@@ -1,6 +1,7 @@
 package com.skipissue.maxway.data.repos
 
 import com.skipissue.maxway.data.datasource.ProductsDataSource
+import com.skipissue.maxway.domain.entity.PhoneEntity
 import com.skipissue.maxway.domain.entity.RegisterConfirmEntity
 import com.skipissue.maxway.domain.entity.UpdateEntity
 import com.skipissue.maxway.domain.entity.responses.CheckRegister
@@ -25,10 +26,9 @@ class ProductsRepositoryImpl @Inject constructor(private val dataSource: Product
     override suspend fun getProductsWithDetail(id: String): Response<ProductsDetailResponse> {
         return dataSource.getProductsWithDetail(id)
     }
-    override suspend fun checkRegister(shipper: String, phone: String): Response<CheckRegister> {
+    override suspend fun checkRegister(shipper: String, phone: PhoneEntity): Response<CheckRegister> {
         return dataSource.checkRegister(shipper, phone)
     }
-
     override suspend fun getFillials(shipper: String): Response<FillialsResponse> {
         return dataSource.getFillials(shipper)
     }
@@ -58,14 +58,12 @@ class ProductsRepositoryImpl @Inject constructor(private val dataSource: Product
         return dataSource.getProductSuggestion(token, productId)
     }
 
-    override suspend fun register(shipper: String, phone: String): Response<RegisterResponse> {
+    override suspend fun register(shipper: String, phone: PhoneEntity): Response<RegisterResponse> {
         return dataSource.register(shipper, phone)
     }
-
-    override suspend fun login(shipper: String, phone: String): Response<RegisterResponse> {
+    override suspend fun login(shipper: String, phone: PhoneEntity): Response<RegisterResponse> {
         return dataSource.login(shipper, phone)
     }
-
     override suspend fun registerConfirm(
         shipper: String,
         entity: RegisterConfirmEntity

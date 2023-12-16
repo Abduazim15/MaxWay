@@ -1,5 +1,6 @@
 package com.skipissue.maxway.modules
 
+import com.skipissue.maxway.data.api.CustomerAPI
 import com.skipissue.maxway.data.api.MaxWayAPI
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,7 @@ object ApplicationModules {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://fastfood.urinboev.uz/api/")
+            .baseUrl("http://fastfood.urinboev.uz/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -32,7 +33,20 @@ object ApplicationModules {
 
     @Provides
     @Singleton
-    fun provideAuthApi(retrofit: Retrofit): MaxWayAPI {
-        return retrofit.create()
+    fun provideMaxWayApi(okHttpClient: OkHttpClient): MaxWayAPI {
+        return Retrofit.Builder()
+            .baseUrl("http://fastfood.urinboev.uz/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build().create()
+    }
+    @Provides
+    @Singleton
+    fun provideCustomerApi(okHttpClient: OkHttpClient): CustomerAPI {
+        return Retrofit.Builder()
+            .baseUrl("https://customer.api.delever.uz/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build().create()
     }
 }

@@ -41,7 +41,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        requireActivity().window.statusBarColor = Color.WHITE
         lifecycleScope.launch {
             viewModel.stateSuccess.collect { data ->
                 adapter.submitList(data.categories)
