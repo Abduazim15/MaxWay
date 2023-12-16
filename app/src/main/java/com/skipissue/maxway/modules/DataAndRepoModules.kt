@@ -4,6 +4,8 @@ import com.skipissue.maxway.data.datasource.ProductsDataSource
 import com.skipissue.maxway.data.datasource.ProductsDataSourceImpl
 import com.skipissue.maxway.data.repos.ProductsRepository
 import com.skipissue.maxway.data.repos.ProductsRepositoryImpl
+import com.skipissue.maxway.data.settings.Settings
+import com.skipissue.maxway.data.settings.SettingsImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,4 +18,6 @@ interface DataAndRepoModules {
     fun bindDataSource(dataSourceImpl: ProductsDataSourceImpl): ProductsDataSource
     @Binds
     fun bindRepo(repositoryImpl: ProductsRepositoryImpl): ProductsRepository
+    @Binds
+    fun bindSettings(settingsImpl: SettingsImpl): Settings
 }

@@ -1,0 +1,32 @@
+package com.skipissue.maxway.domain.entity.responses
+
+data class Branche(
+    val address: String,
+    val created_at: String,
+    val crm: String,
+    val destination: String,
+    val fare: Any,
+    val fare_id: String,
+    val geozone: Geozone,
+    val geozone_id: String,
+    val id: String,
+    val iiko_hall_terminal_id: String,
+    val iiko_id: String,
+    val iiko_terminal_id: String,
+    val image: String,
+    val is_active: Boolean,
+    val jowi_id: Any,
+    val location: Location,
+    val menu_id: String,
+    val menu_title: Any,
+    val name: String,
+    val orders_limit: String,
+    val phone: String,
+    val radius_without_delivery_price: Int,
+    val real_time_orders_amount: Int,
+    val shipper_id: String,
+    val tg_chat_id: String,
+    val updated_at: String,
+    val work_hour_end: String,
+    val work_hour_start: String
+)
