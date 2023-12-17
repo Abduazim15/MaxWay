@@ -43,6 +43,7 @@ class PhoneViewModel @Inject constructor(
             handleState(state)
         }
     }
+
     fun register(number: String) {
         viewModelScope.launch {
             val state = registerUseCase.invoke(number)
@@ -52,10 +53,8 @@ class PhoneViewModel @Inject constructor(
 
     fun login(number: String) {
         viewModelScope.launch {
-            stateCheck.collect {
-                val state = loginUseCase.invoke(number)
-                handleState(state)
-            }
+            val state = loginUseCase.invoke(number)
+            handleState(state)
         }
     }
 

@@ -47,7 +47,7 @@
             android:background="@drawable/white_square"
             android:gravity="center"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/box2"
             android:singleLine="true"
@@ -64,12 +64,12 @@
             android:background="@drawable/white_square"
             android:gravity="center"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/box3"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/box3"
@@ -81,12 +81,12 @@
             android:background="@drawable/white_square"
             android:gravity="center"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/box4"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
         <EditText
             android:id="@+id/box4"
             android:layout_width="0dp"
@@ -97,12 +97,12 @@
             android:background="@drawable/white_square"
             android:gravity="center"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/box5"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
         <EditText
             android:id="@+id/box5"
             android:layout_width="0dp"
@@ -113,12 +113,12 @@
             android:background="@drawable/white_square"
             android:gravity="center"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/box6"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
         <EditText
             android:id="@+id/box6"
             android:layout_width="0dp"
@@ -129,11 +129,11 @@
             android:background="@drawable/white_square"
             android:gravity="center"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="1"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
     </LinearLayout>
     <FrameLayout

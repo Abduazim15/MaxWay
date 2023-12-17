@@ -4,12 +4,12 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.navigation.NavigationBarView
 import com.skipissue.maxway.data.settings.Settings
 import com.skipissue.maxway.databinding.ActivityMainBinding
 import com.skipissue.maxway.presentation.fragments.BasketFragment
-import com.skipissue.maxway.presentation.fragments.ConfirmFragment
 import com.skipissue.maxway.presentation.fragments.MainFragment
 import com.skipissue.maxway.presentation.fragments.OrdersFragment
 import com.skipissue.maxway.presentation.fragments.PhoneFragment
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.basket -> {
                     if (settings.phoneNumber.isNullOrEmpty()) {
                         supportFragmentManager.beginTransaction().setReorderingAllowed(true).addToBackStack("MainFragment")
-                            .replace(R.id.container, ConfirmFragment()).commit()
+                            .replace(R.id.container, PhoneFragment::class.java, bundleOf("tag" to BasketFragment.TAG)).commit()
                     } else
                         supportFragmentManager.beginTransaction().setReorderingAllowed(true)
                             .replace(R.id.container, BasketFragment()).commit()
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.my_orders -> {
                     if (settings.phoneNumber.isNullOrEmpty()) {
                         supportFragmentManager.beginTransaction().setReorderingAllowed(true).addToBackStack("MainFragment")
-                            .replace(R.id.container, PhoneFragment()).commit()
+                            .replace(R.id.container, PhoneFragment::class.java, bundleOf("tag" to OrdersFragment.TAG)).commit()
                     } else
                         supportFragmentManager.beginTransaction().setReorderingAllowed(true)
                             .replace(R.id.container, OrdersFragment()).commit()
