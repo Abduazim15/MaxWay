@@ -5,29 +5,42 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.location.LocationServices
 import com.skipissue.maxway.R
+import com.skipissue.maxway.data.settings.Settings
 import com.skipissue.maxway.databinding.LocationFragmentBinding
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.location.LocationManager
 import com.yandex.mapkit.map.CameraListener
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.map.CameraUpdateReason
 import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.mapview.MapView
-import com.yandex.mapkit.user_location.UserLocationLayer
+import com.yandex.mapkit.search.Response
+import com.yandex.mapkit.search.SearchFactory
+import com.yandex.mapkit.search.SearchManagerType
+import com.yandex.mapkit.search.SearchOptions
+import com.yandex.mapkit.search.Session
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class LocationFragment : Fragment(R.layout.location_fragment) {
     private val binding: LocationFragmentBinding by viewBinding()
-    private lateinit var locationManager: LocationManager
-    private lateinit var userLocationLayer: UserLocationLayer
     private lateinit var mapView: MapView
+    private val _liveData: MutableLiveData<String?> = MutableLiveData()
+    private val liveData: LiveData<String?> = _liveData
+    @Inject
+    lateinit var settings: Settings
     override fun onStart() {
         super.onStart()
         MapKitFactory.getInstance().onStart()
@@ -53,13 +66,18 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
                 p3: Boolean
             ) {
                 if (p3) {
-                    val target = p1.target
-                    val point = Point(target.latitude, target.longitude)
+                    val latitude = p1.target.latitude
+                    val longitude = p1.target.longitude
+                    searchForAddress(latitude, longitude)
                 }
+
             }
 
-
         })
+        binding.submit.setOnClickListener {
+            settings.location = binding.name.text.toString()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
         binding.current.setOnClickListener {
             var fusedLocationClient =
                 LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -69,6 +87,9 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
                     goToLocation(location.latitude, location.longitude)
                 }
             }
+        }
+        liveData.observe(viewLifecycleOwner) { data ->
+            binding.name.setText(data)
         }
     }
 
@@ -104,6 +125,35 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
             cameraPosition,
             Animation(Animation.Type.SMOOTH, 1.5f),
             null
+        )
+    }
+    private fun searchForAddress(latitude: Double, longitude: Double) {
+        val searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
+        val options = SearchOptions()
+
+        val point = Point(latitude, longitude)
+        searchManager.submit(
+            point,
+            null,
+            options,
+            object : Session.SearchListener {
+                override fun onSearchResponse(response: Response) {
+                    val resultList = response.collection.children.mapNotNull { it.obj }
+                    if (resultList.isNotEmpty()) {
+                        val topResult = resultList[0]
+                        val addressName = topResult.name
+                        _liveData.postValue(addressName)
+
+                    } else {
+
+                    }
+                }
+
+                override fun onSearchError(p0: com.yandex.runtime.Error) {
+                }
+
+
+            }
         )
     }
 }

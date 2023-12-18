@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.skipissue.maxway.R
+import com.skipissue.maxway.data.settings.Settings
 import com.skipissue.maxway.databinding.MainFragmentBinding
 import com.skipissue.maxway.domain.entity.TabEntity
 import com.skipissue.maxway.presentation.adapter.CategoriesAdapter
@@ -22,6 +23,7 @@ import com.skipissue.maxway.presentation.adapter.TabsAdapter
 import com.skipissue.maxway.presentation.viewmodels.ProductsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.main_fragment) {
@@ -31,6 +33,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private val tabs by lazy { ArrayList<TabEntity>() }
     private val tabAdapter by lazy { TabsAdapter(tabs) }
     private var isUserScrolling = false
+
+    @Inject
+    lateinit var settings: Settings
     private val viewModel: ProductsViewModel by viewModels()
     private val smoothScroller by lazy {
         object : LinearSmoothScroller(requireContext()) {
@@ -53,6 +58,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         }
         val layoutManagerR = LinearLayoutManager(requireContext())
         binding.apply {
+            if (!settings.location.isNullOrEmpty())
+                location.setText(settings.location)
             tab.adapter = tabAdapter
             recycler.adapter = adapter
             recycler.layoutManager = layoutManagerR
@@ -66,7 +73,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 search.setText("")
             }
             locationBar.setOnClickListener {
-                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.GONE
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility =
+                    View.GONE
                 parentFragmentManager.beginTransaction().addToBackStack("MainFragment")
                     .setReorderingAllowed(true).replace(R.id.container, LocationFragment()).commit()
             }
@@ -99,10 +107,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.GONE
             parentFragmentManager.beginTransaction().setReorderingAllowed(true)
                 .addToBackStack("MainFragment").replace(
-                R.id.container, ChooseFragment::class.java, bundleOf(
-                    "id" to adapter.currentList[cIndex].products[index].id
-                )
-            ).commit()
+                    R.id.container, ChooseFragment::class.java, bundleOf(
+                        "id" to adapter.currentList[cIndex].products[index].id
+                    )
+                ).commit()
         }
         tabAdapter.setOnClickClickListener { index ->
             if (index == tabAdapter.list.size - 1) {
