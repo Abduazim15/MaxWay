@@ -41,6 +41,7 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
     private val liveData: LiveData<String?> = _liveData
     var lat = 0.0
     var lon = 0.0
+
     @Inject
     lateinit var settings: Settings
     override fun onStart() {
@@ -108,9 +109,8 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            goToLocation(41.207608, 69.184516)
-
-
+            if (settings.lat != null && settings.lon != null)
+                goToLocation(settings.lat!!.toDouble(), settings.lon!!.toDouble())
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -136,8 +136,10 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
             null
         )
     }
+
     private fun searchForAddress(latitude: Double, longitude: Double) {
-        val searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
+        val searchManager =
+            SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
         val options = SearchOptions()
 
         val point = Point(latitude, longitude)
