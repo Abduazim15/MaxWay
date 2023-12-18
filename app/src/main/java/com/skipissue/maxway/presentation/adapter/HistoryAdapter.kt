@@ -1,9 +1,12 @@
 package com.skipissue.maxway.presentation.adapter
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -20,7 +23,7 @@ class HistoryAdapter : ListAdapter<Order, HistoryViewHolder>(CharacterComparator
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.food_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.finish_order_item, parent, false)
         return HistoryViewHolder(view, onClickListener)
     }
 
@@ -43,7 +46,7 @@ class HistoryAdapter : ListAdapter<Order, HistoryViewHolder>(CharacterComparator
 
 class HistoryViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) :
     RecyclerView.ViewHolder(view) {
-    val layout : LinearLayout = view.findViewById(R.id.item)
+    val layout : FrameLayout = view.findViewById(R.id.item)
     private val orderId: TextView = view.findViewById(R.id.orderId)
     private val price: TextView = view.findViewById(R.id.price)
     private val status: TextView = view.findViewById(R.id.status)
@@ -52,7 +55,10 @@ class HistoryViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) :
     fun bind(order: Order) {
         orderId.setText("Buyurtma No${order.external_order_id}")
         price.setText("${(order.order_amount + order.co_delivery_price)} so'm")
-        status.setText(if (order.paid) "Muvaffaqiyatli" else "Buyurtma bekor qilindi")
+        status.setText(if (order.paid) {"Muvaffaqiyatli"} else {
+            status.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#BCF44336"))
+            status.setTextColor(Color.BLACK)
+            "Buyurtma bekor qilindi"})
         val createdAt = order.created_at.substring(0, order.created_at.indexOf(" "))
         date.setText(createdAt.replace("-", "."))
         layout.setOnClickListener {

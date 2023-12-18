@@ -10,8 +10,8 @@ class ViewPagerAdapter(fm: Fragment) : FragmentStateAdapter(fm) {
 
     override fun createFragment(position: Int): Fragment {
         when (position){
-            1 -> return ActiveOrderFragment()
-            2 -> return FinishedOrderFragment()
+            0 -> return ActiveOrderFragment()
+            1 -> return FinishedOrderFragment()
         }
         return ActiveOrderFragment()
     }

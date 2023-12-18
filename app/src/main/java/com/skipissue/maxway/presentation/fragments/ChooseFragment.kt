@@ -1,8 +1,6 @@
 package com.skipissue.maxway.presentation.fragments
 
-import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.skipissue.maxway.R
 import com.skipissue.maxway.databinding.ChooseFragmentBinding
 import com.skipissue.maxway.presentation.viewmodels.ProductsViewModel
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
@@ -40,7 +37,7 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
                     description.setText(data.description.uz)
                     name.setText(data.title.uz)
                     title.setText(data.categories[0].title.uz)
-                    Picasso.get().load("https://cdn.delever.uz/delever/" + data.image)
+                    Glide.with(requireContext()).load("https://cdn.delever.uz/delever/" + data.image)
                         .into(binding.image)
                     sum.setText("${numberFormat.format(data.out_price)} UZS")
                     price = data.out_price

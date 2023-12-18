@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.skipissue.maxway.R
 import com.skipissue.maxway.domain.entity.responses.Product
-import com.squareup.picasso.Picasso
 
 
 class FoodsAdapter : ListAdapter<Product, FoodsViewHolder>(CharacterComparator) {
@@ -56,7 +56,7 @@ class FoodsViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) :
         name.setText(food.title.uz)
         cost.setText(food.out_price.toString() + " so'm")
         description.setText(food.description.uz)
-        Picasso.get().load("https://cdn.delever.uz/delever/" + food.image).into(image)
+        Glide.with(image).load("https://cdn.delever.uz/delever/" + food.image).into(image)
         layout.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
         }
