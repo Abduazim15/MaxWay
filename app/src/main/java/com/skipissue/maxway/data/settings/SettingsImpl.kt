@@ -29,5 +29,11 @@ class SettingsImpl @Inject constructor(@ApplicationContext context: Context,
     override var language: Int?
         get() = preferences.getInt("language", 0)
         set(value) {preferences.edit().putInt("language", value!!).apply()}
+    override var lat: Float?
+        get() = preferences.getFloat("lat", 0f)
+        set(value){preferences.edit().putFloat("lat", value!!).apply()}
+    override var lon: Float?
+        get() = preferences.getFloat("lon", 0f)
+        set(value) {preferences.edit().putFloat("lon", value!!).apply()}
 
 }

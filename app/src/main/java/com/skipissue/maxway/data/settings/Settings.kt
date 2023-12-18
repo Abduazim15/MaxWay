@@ -8,4 +8,6 @@ interface Settings {
     var shipperId: String?
     var location: String?
     var language: Int?
+    var lat:Float?
+    var lon:Float?
 }

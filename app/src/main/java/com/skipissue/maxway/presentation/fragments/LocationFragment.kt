@@ -39,6 +39,8 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
     private lateinit var mapView: MapView
     private val _liveData: MutableLiveData<String?> = MutableLiveData()
     private val liveData: LiveData<String?> = _liveData
+    var lat = 0.0
+    var lon = 0.0
     @Inject
     lateinit var settings: Settings
     override fun onStart() {
@@ -68,23 +70,30 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
                 if (p3) {
                     val latitude = p1.target.latitude
                     val longitude = p1.target.longitude
+                    lat = latitude
+                    lon = longitude
                     searchForAddress(latitude, longitude)
                 }
 
             }
 
         })
-        binding.submit.setOnClickListener {
-            settings.location = binding.name.text.toString()
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
-        binding.current.setOnClickListener {
-            var fusedLocationClient =
-                LocationServices.getFusedLocationProviderClient(requireActivity())
+        binding.apply {
+            submit.setOnClickListener {
+                settings.location = name.text.toString()
+                settings.lat = lat.toFloat()
+                settings.lon = lon.toFloat()
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
+            name.setText(settings.location)
+            current.setOnClickListener {
+                var fusedLocationClient =
+                    LocationServices.getFusedLocationProviderClient(requireActivity())
 
-            fusedLocationClient.lastLocation.addOnSuccessListener { location: android.location.Location? ->
-                if (location != null) {
-                    goToLocation(location.latitude, location.longitude)
+                fusedLocationClient.lastLocation.addOnSuccessListener { location: android.location.Location? ->
+                    if (location != null) {
+                        goToLocation(location.latitude, location.longitude)
+                    }
                 }
             }
         }
