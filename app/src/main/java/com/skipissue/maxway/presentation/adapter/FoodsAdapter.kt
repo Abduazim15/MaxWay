@@ -46,17 +46,17 @@ class FoodsAdapter : ListAdapter<Product, FoodsViewHolder>(CharacterComparator) 
 
 class FoodsViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?) :
     RecyclerView.ViewHolder(view) {
-    val layout : LinearLayout = view.findViewById(R.id.item)
+    val layout: LinearLayout = view.findViewById(R.id.item)
     private val name: TextView = view.findViewById(R.id.name)
     private val cost: TextView = view.findViewById(R.id.cost)
     private val description: TextView = view.findViewById(R.id.description)
     private val image: ImageView = view.findViewById(R.id.image)
 
     fun bind(food: Product) {
-        cost.setText("${food.out_price} ${food.currency}")
         name.setText(food.title.uz)
+        cost.setText(food.out_price.toString() + " so'm")
         description.setText(food.description.uz)
-        Picasso.get().load("https://cdn.delever.uz/delever/"+ food.image).into(image)
+        Picasso.get().load("https://cdn.delever.uz/delever/" + food.image).into(image)
         layout.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
         }

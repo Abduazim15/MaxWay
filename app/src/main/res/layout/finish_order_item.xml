@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:background="@color/white"
+    android:id="@+id/item"
+    android:layout_marginTop="10dp"
+    android:padding="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buyurtma No234765"
+        android:textColor="@color/black"
+        android:id="@+id/orderId"
+        android:fontFamily="@font/sf_pro_display"
+        android:textSize="17sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30 000 so'm"
+        android:id="@+id/price"
+        android:textColor="@color/black"
+        android:layout_gravity="bottom"
+        android:fontFamily="@font/sf_pro_display"
+        android:textSize="15sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buyurtma bekor qilindi"
+        android:layout_gravity="end"
+        android:textColor="#2196F3"
+        android:gravity="center"
+        android:id="@+id/status"
+        android:paddingVertical="6dp"
+        android:paddingHorizontal="10dp"
+        android:backgroundTint="#3B008EFF"
+        android:fontFamily="@font/sf_pro_display"
+        android:background="@drawable/purple_square"
+        android:textSize="15sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="14.12.2023"
+        android:id="@+id/date"
+        android:textColor="#303030"
+        android:layout_gravity="bottom|right"
+        android:fontFamily="@font/sf_pro_display"
+        android:textSize="15sp"/>
+
+</FrameLayout>

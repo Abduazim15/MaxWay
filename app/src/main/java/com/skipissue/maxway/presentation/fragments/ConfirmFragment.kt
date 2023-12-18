@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -116,6 +117,7 @@ class ConfirmFragment : Fragment(R.layout.confirm_fragment) {
                 else
                     parentFragmentManager.beginTransaction().setReorderingAllowed(true)
                         .replace(R.id.container, ProfileFragment()).commit()
+                parentFragmentManager.popBackStackImmediate(R.id.container, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             }
         }
         lifecycleScope.launch {

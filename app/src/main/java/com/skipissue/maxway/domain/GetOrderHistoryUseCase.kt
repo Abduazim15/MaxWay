@@ -10,9 +10,10 @@ import javax.inject.Inject
 class GetOrderHistoryUseCase @Inject constructor(private val repository: ProductsRepository,private val settings: Settings) {
     suspend operator fun invoke(): State {
         try {
-
-            return State.Success(repository.getOrderHistory(settings.accessToken!!, settings.id!!).body())
+            val response = repository.getOrderHistory(settings.accessToken!!, settings.id!!)
+            return State.Success(response.body())
         } catch (e: Exception) {
+            throw e
             e.printStackTrace()
             if (e is IOException) return State.NoNetwork
             return State.Error(1)

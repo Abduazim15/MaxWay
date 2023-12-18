@@ -65,4 +65,7 @@ class MainActivity : AppCompatActivity() {
     fun hideOrShow(hide: Boolean) {
         binding.bottom.visibility = if (hide) View.GONE else View.VISIBLE
     }
+    fun select(id: Int) {
+        binding.bottom.selectedItemId = id
+    }
 }

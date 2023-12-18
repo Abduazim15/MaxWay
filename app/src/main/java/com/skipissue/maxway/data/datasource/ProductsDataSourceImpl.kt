@@ -71,14 +71,14 @@ class ProductsDataSourceImpl @Inject constructor(private val maxWayAPI: MaxWayAP
         shipper: String,
         entity: RegisterConfirmEntity
     ): Response<RegisterConfirmResponse> {
-        return customerAPI.registerConfirm(shipper, entity)
+        return customerAPI.registerConfirm(shipper,"website", entity)
     }
 
     override suspend fun loginConfirm(
         shipper: String,
         entity: RegisterConfirmEntity
     ): Response<RegisterConfirmResponse> {
-        return customerAPI.loginConfirm(shipper, entity)
+        return customerAPI.loginConfirm(shipper,"website", entity)
     }
 
     override suspend fun updateUser(

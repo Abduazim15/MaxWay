@@ -16,6 +16,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -40,9 +41,9 @@ interface CustomerAPI {
     @POST("v1/customers/login")
     suspend fun login(@Header("Shipper") shipper : String, @Body phone: PhoneEntity) : Response<RegisterResponse>
     @POST("v1/customers/register-confirm")
-    suspend fun registerConfirm(@Header("Shipper") shipper : String, @Body entity: RegisterConfirmEntity) : Response<RegisterConfirmResponse>
+    suspend fun registerConfirm(@Header("Shipper") shipper : String,@Header("Platform") platform : String, @Body entity: RegisterConfirmEntity) : Response<RegisterConfirmResponse>
     @POST("v1/customers/confirm-login")
-    suspend fun loginConfirm(@Header("Shipper") shipper : String, @Body entity: RegisterConfirmEntity) : Response<RegisterConfirmResponse>
+    suspend fun loginConfirm(@Header("Shipper") shipper : String,@Header("Platform") platform : String, @Body entity: RegisterConfirmEntity) : Response<RegisterConfirmResponse>
     @PUT("v1/customers/{userId}")
     suspend fun updateUser(@Path("userId") userId: String, @Header("Authorization") token : String, @Body entity: UpdateEntity): Response<UpdateResponse>
 
