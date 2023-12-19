@@ -2,6 +2,7 @@ package com.skipissue.maxway.presentation.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,13 +21,17 @@ class FinishedOrderFragment : Fragment(R.layout.active_fragment) {
     private val viewModel: HistoryViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.recycler.adapter = adapter
+        viewModel.getOrders()
         lifecycleScope.launch {
-            viewModel.stateSuccess.collect{ data ->
+            viewModel.stateSuccess.collect { data ->
                 adapter.submitList(data.orders)
             }
         }
         adapter.setOnClickClickListener { index ->
 
+            parentFragment?.parentFragmentManager?.beginTransaction()?.setReorderingAllowed(true)
+                ?.addToBackStack("FinishedOrderFragment")
+                ?.replace(R.id.container, BillFragment::class.java, bundleOf("id" to adapter.currentList[index].id))?.commit()
         }
     }
 

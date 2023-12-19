@@ -57,6 +57,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.16.0'
 
     def fragment_version = "1.6.1"
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.26'
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation 'com.yandex.android:maps.mobile:4.4.0-full'

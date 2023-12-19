@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.basket -> {
-                    if (settings.phoneNumber.isNullOrEmpty()) {
+                    if (settings.accessToken.isNullOrEmpty()) {
                         supportFragmentManager.beginTransaction().setReorderingAllowed(true).addToBackStack("MainFragment")
                             .replace(R.id.container, PhoneFragment::class.java, bundleOf("tag" to BasketFragment.TAG)).commit()
                     } else
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.my_orders -> {
-                    if (settings.phoneNumber.isNullOrEmpty()) {
+                    if (settings.accessToken.isNullOrEmpty()) {
                         supportFragmentManager.beginTransaction().setReorderingAllowed(true).addToBackStack("MainFragment")
                             .replace(R.id.container, PhoneFragment::class.java, bundleOf("tag" to OrdersFragment.TAG)).commit()
                     } else

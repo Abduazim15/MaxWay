@@ -53,7 +53,14 @@ class PhoneFragment : Fragment(R.layout.phone_fragment) {
     override fun onStart() {
         super.onStart()
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        (requireActivity() as MainActivity).hideOrShow(false)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
         (requireActivity() as MainActivity).hideOrShow(true)
+
     }
 
 }

@@ -3,6 +3,7 @@ package com.skipissue.maxway.data.datasource
 import com.skipissue.maxway.domain.entity.PhoneEntity
 import com.skipissue.maxway.domain.entity.RegisterConfirmEntity
 import com.skipissue.maxway.domain.entity.UpdateEntity
+import com.skipissue.maxway.domain.entity.responses.AboutOrderResponse
 import com.skipissue.maxway.domain.entity.responses.CheckRegister
 import com.skipissue.maxway.domain.entity.responses.FillialsResponse
 import com.skipissue.maxway.domain.entity.responses.OrderHistoryResponse
@@ -39,4 +40,5 @@ interface ProductsDataSource{
     suspend fun loginConfirm( shipper : String,  entity: RegisterConfirmEntity) : Response<RegisterConfirmResponse>
 
     suspend fun updateUser( userId: String,  token : String,  entity: UpdateEntity): Response<UpdateResponse>
+    suspend fun getAboutOrder(shipper: String, userId: String,  token : String): Response<AboutOrderResponse>
 }

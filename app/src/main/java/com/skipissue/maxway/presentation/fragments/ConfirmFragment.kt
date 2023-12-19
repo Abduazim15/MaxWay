@@ -135,13 +135,13 @@ class ConfirmFragment : Fragment(R.layout.confirm_fragment) {
     override fun onStart() {
         super.onStart()
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-        (requireActivity() as MainActivity).hideOrShow(true)
+        (requireActivity() as MainActivity).hideOrShow(false)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
-        (requireActivity() as MainActivity).hideOrShow(false)
+        (requireActivity() as MainActivity).hideOrShow(true)
     }
 
 }

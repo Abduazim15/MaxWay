@@ -3,6 +3,7 @@ package com.skipissue.maxway.data.api
 import com.skipissue.maxway.domain.entity.PhoneEntity
 import com.skipissue.maxway.domain.entity.RegisterConfirmEntity
 import com.skipissue.maxway.domain.entity.UpdateEntity
+import com.skipissue.maxway.domain.entity.responses.AboutOrderResponse
 import com.skipissue.maxway.domain.entity.responses.CheckRegister
 import com.skipissue.maxway.domain.entity.responses.FillialsResponse
 import com.skipissue.maxway.domain.entity.responses.OrderHistoryResponse
@@ -28,6 +29,8 @@ interface CustomerAPI {
 
     @GET("v1/branches?limit=100")
     suspend fun getFillials(@Header("Shipper") shipper : String) : Response<FillialsResponse>
+    @GET("v2/order/{id}")
+    suspend fun getAboutOrder(@Header("Shipper") shipper : String,@Path("id") userId: String,@Header("Authorization") token : String) : Response<AboutOrderResponse>
     @GET("v1/customer-profile")
     suspend fun getProfile(@Header("Authorization") token : String) : Response<ProfileResponse>
     @GET("v1/customers/{USER-ID}/orders")

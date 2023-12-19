@@ -4,6 +4,7 @@ import com.skipissue.maxway.data.datasource.ProductsDataSource
 import com.skipissue.maxway.domain.entity.PhoneEntity
 import com.skipissue.maxway.domain.entity.RegisterConfirmEntity
 import com.skipissue.maxway.domain.entity.UpdateEntity
+import com.skipissue.maxway.domain.entity.responses.AboutOrderResponse
 import com.skipissue.maxway.domain.entity.responses.CheckRegister
 import com.skipissue.maxway.domain.entity.responses.FillialsResponse
 import com.skipissue.maxway.domain.entity.responses.OrderHistoryResponse
@@ -84,5 +85,13 @@ class ProductsRepositoryImpl @Inject constructor(private val dataSource: Product
         entity: UpdateEntity
     ): Response<UpdateResponse> {
         return dataSource.updateUser(userId, token, entity)
+    }
+
+    override suspend fun getAboutOrder(
+        shipper: String,
+        userId: String,
+        token: String
+    ): Response<AboutOrderResponse> {
+        return dataSource.getAboutOrder(shipper, userId, token)
     }
 }
