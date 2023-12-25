@@ -98,9 +98,10 @@ class ConfirmFragment : Fragment(R.layout.confirm_fragment) {
                 if (i.text.isNotBlank())
                     code += i.text.toString()
             }
-            lifecycleScope.launch {
-                viewModel.login(settings.phoneNumber!!, code)
-            }
+            if (code.length == 6)
+                lifecycleScope.launch {
+                    viewModel.login(settings.phoneNumber!!, code)
+                }
         }
         lifecycleScope.launch {
             viewModel.stateSuccess.collect { data ->
@@ -108,16 +109,8 @@ class ConfirmFragment : Fragment(R.layout.confirm_fragment) {
                 settings.id = data.id
                 settings.name = data.name
                 settings.accessToken = data.access_token
-                if (fromTo == BasketFragment.TAG)
-                    parentFragmentManager.beginTransaction().setReorderingAllowed(true)
-                        .replace(R.id.container, BasketFragment()).commit()
-                else if (fromTo == OrdersFragment.TAG)
-                    parentFragmentManager.beginTransaction().setReorderingAllowed(true)
-                        .replace(R.id.container, OrdersFragment()).commit()
-                else
-                    parentFragmentManager.beginTransaction().setReorderingAllowed(true)
-                        .replace(R.id.container, ProfileFragment()).commit()
-                parentFragmentManager.popBackStackImmediate(R.id.container, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                parentFragmentManager.popBackStack()
+                requireActivity().onBackPressedDispatcher.onBackPressed()
             }
         }
         lifecycleScope.launch {
@@ -135,13 +128,13 @@ class ConfirmFragment : Fragment(R.layout.confirm_fragment) {
     override fun onStart() {
         super.onStart()
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-        (requireActivity() as MainActivity).hideOrShow(false)
+        (requireActivity() as MainActivity).hideOrShow(true)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
-        (requireActivity() as MainActivity).hideOrShow(true)
+        (requireActivity() as MainActivity).hideOrShow(false)
     }
 
 }

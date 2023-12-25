@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -13,6 +14,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.location.LocationServices
+import com.skipissue.maxway.MainActivity
 import com.skipissue.maxway.R
 import com.skipissue.maxway.data.settings.Settings
 import com.skipissue.maxway.databinding.LocationFragmentBinding
@@ -48,6 +50,7 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
         super.onStart()
         MapKitFactory.getInstance().onStart()
         mapView.onStart();
+        (requireActivity() as MainActivity).hideOrShow(true)
     }
 
     override fun onStop() {
@@ -101,6 +104,12 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
         liveData.observe(viewLifecycleOwner) { data ->
             binding.name.setText(data)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (requireActivity() as MainActivity).hideOrShow(false)
+
     }
 
     private fun requestLocationPermission() {

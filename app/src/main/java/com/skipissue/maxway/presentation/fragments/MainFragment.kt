@@ -73,9 +73,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 search.setText("")
             }
             locationBar.setOnClickListener {
-                requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility =
-                    View.GONE
-                parentFragmentManager.beginTransaction().addToBackStack("MainFragment")
+                requireParentFragment().parentFragmentManager.beginTransaction().addToBackStack("MainFragment")
                     .setReorderingAllowed(true).replace(R.id.container, LocationFragment()).commit()
             }
             val layoutManager = recycler.layoutManager as LinearLayoutManager
@@ -104,8 +102,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             })
         }
         adapter.setOnClickClickListener { cIndex, index ->
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.GONE
-            parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+            requireParentFragment().parentFragmentManager.beginTransaction().setReorderingAllowed(true)
                 .addToBackStack("MainFragment").replace(
                     R.id.container, ChooseFragment::class.java, bundleOf(
                         "id" to adapter.currentList[cIndex].products[index].id
@@ -121,6 +118,5 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 layoutManagerR.startSmoothScroll(smoothScroller)
             }
         }
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom).visibility = View.VISIBLE
     }
 }

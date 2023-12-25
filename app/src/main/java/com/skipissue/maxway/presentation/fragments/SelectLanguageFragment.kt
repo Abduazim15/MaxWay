@@ -48,7 +48,7 @@ class SelectLanguageFragment () :
     }
     private fun replace(){
         parentFragmentManager.beginTransaction().setReorderingAllowed(true)
-            .replace(R.id.container, MainFragment()).commit()
+            .replace(R.id.container, MainScreensFragment()).commit()
     }
 
 

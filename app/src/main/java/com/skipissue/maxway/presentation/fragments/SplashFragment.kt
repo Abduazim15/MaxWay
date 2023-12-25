@@ -31,7 +31,7 @@ class SplashFragment :
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.container, SelectLanguageFragment()).commit()
                 else
-                    parentFragmentManager.beginTransaction().replace(R.id.container, MainFragment())
+                    parentFragmentManager.beginTransaction().replace(R.id.container, MainScreensFragment())
                         .commit()
                 requireActivity().window.statusBarColor = Color.WHITE
             }

@@ -1,10 +1,14 @@
 package com.skipissue.maxway.modules
 
+import android.content.Context
+import androidx.room.Room
 import com.skipissue.maxway.data.api.CustomerAPI
 import com.skipissue.maxway.data.api.MaxWayAPI
+import com.skipissue.maxway.data.database.AppDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -48,5 +52,11 @@ object ApplicationModules {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build().create()
+    }
+    @Provides
+    @Singleton
+    fun provideDatabase(@ApplicationContext context: Context): AppDataBase {
+        return Room.databaseBuilder(context, AppDataBase::class.java, "basketHistory")
+            .build()
     }
 }

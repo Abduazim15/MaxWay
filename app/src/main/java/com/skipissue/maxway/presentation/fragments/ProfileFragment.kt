@@ -21,7 +21,7 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.settings.setOnClickListener {
             (requireActivity() as MainActivity).hideOrShow(true)
-            parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+            requireParentFragment().parentFragmentManager.beginTransaction().setReorderingAllowed(true)
                 .addToBackStack("ProfileFragment").replace(R.id.container, SettingsFragment())
                 .commit()
         }

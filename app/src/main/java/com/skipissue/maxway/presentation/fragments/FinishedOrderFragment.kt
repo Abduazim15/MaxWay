@@ -29,7 +29,7 @@ class FinishedOrderFragment : Fragment(R.layout.active_fragment) {
         }
         adapter.setOnClickClickListener { index ->
 
-            parentFragment?.parentFragmentManager?.beginTransaction()?.setReorderingAllowed(true)
+            parentFragment?.parentFragment?.parentFragmentManager?.beginTransaction()?.setReorderingAllowed(true)
                 ?.addToBackStack("FinishedOrderFragment")
                 ?.replace(R.id.container, BillFragment::class.java, bundleOf("id" to adapter.currentList[index].id))?.commit()
         }

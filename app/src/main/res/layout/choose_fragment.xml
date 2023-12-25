@@ -121,12 +121,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Add"
+                    android:id="@+id/changeable"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <Space
                     android:layout_width="20dp"
+                    android:id="@+id/space"
                     android:layout_height="wrap_content" />
 
                 <TextView

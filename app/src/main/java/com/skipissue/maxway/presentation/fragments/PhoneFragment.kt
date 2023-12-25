@@ -22,7 +22,7 @@ import javax.inject.Inject
 class PhoneFragment : Fragment(R.layout.phone_fragment) {
     private val binding: PhoneFragmentBinding by viewBinding()
     private val viewModel: PhoneViewModel by viewModels()
-    private var fromTo = 0
+    private var fromTo: Int = 0
     @Inject
     lateinit var settings: Settings
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,13 +53,13 @@ class PhoneFragment : Fragment(R.layout.phone_fragment) {
     override fun onStart() {
         super.onStart()
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-        (requireActivity() as MainActivity).hideOrShow(false)
+        (requireActivity() as MainActivity).hideOrShow(true)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
-        (requireActivity() as MainActivity).hideOrShow(true)
+        (requireActivity() as MainActivity).hideOrShow(false)
 
     }
 
