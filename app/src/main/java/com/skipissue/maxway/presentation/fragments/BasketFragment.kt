@@ -25,7 +25,6 @@ class BasketFragment : Fragment(R.layout.basket_fragment) {
         binding.recycler.adapter = adapter
         viewModel.livedata.observe(viewLifecycleOwner){ data ->
             adapter.submitList(data)
-            Toast.makeText(requireContext(), data.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
