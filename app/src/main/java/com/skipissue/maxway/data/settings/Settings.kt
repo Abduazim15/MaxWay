@@ -10,4 +10,5 @@ interface Settings {
     var language: Int?
     var lat:Float?
     var lon:Float?
+    var date: String?
 }

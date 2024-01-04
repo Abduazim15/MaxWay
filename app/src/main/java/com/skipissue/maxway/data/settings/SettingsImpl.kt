@@ -35,5 +35,7 @@ class SettingsImpl @Inject constructor(@ApplicationContext context: Context,
     override var lon: Float?
         get() = preferences.getFloat("lon", 0f)
         set(value) {preferences.edit().putFloat("lon", value!!).apply()}
-
+    override var date: String?
+        get() = preferences.getString("date", null)
+        set(value) {preferences.edit().putString("date", value).apply()}
 }

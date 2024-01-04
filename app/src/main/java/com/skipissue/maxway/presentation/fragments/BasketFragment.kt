@@ -26,6 +26,14 @@ class BasketFragment : Fragment(R.layout.basket_fragment) {
         viewModel.livedata.observe(viewLifecycleOwner){ data ->
             adapter.submitList(data)
         }
+        adapter.setOnDecClickClickListener { index , quantity->
+            if (quantity > 1)
+                viewModel.increaseAmount(adapter.currentList[index].id.toInt(), -1)
+        }
+        adapter.setOnIncClickClickListener { index , quantity->
+            if (quantity < 100)
+                viewModel.increaseAmount(adapter.currentList[index].id.toInt(), 1)
+        }
     }
 
     override fun onResume() {

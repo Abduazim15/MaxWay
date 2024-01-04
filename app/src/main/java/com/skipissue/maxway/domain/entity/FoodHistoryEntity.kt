@@ -10,6 +10,6 @@ class FoodHistoryEntity(
     val name : String,
     val foodId: String,
     val imageId: String,
-    val quantity: Int,
+    var quantity: Int,
     val price: Int
 )

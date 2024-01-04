@@ -27,6 +27,16 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
         }
         binding.name.setText(settings.name)
         binding.number.setText(formatPhoneNumber(settings.phoneNumber!!))
+        binding.update.setOnClickListener {
+            requireParentFragment().parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+                .addToBackStack("ProfileFragment").replace(R.id.container, UpdateFragment())
+                .commit()
+        }
+        binding.filials.setOnClickListener {
+            requireParentFragment().parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+                .addToBackStack("ProfileFragment").replace(R.id.container, BranchesFragment())
+                .commit()
+        }
     }
     fun formatPhoneNumber(phoneNumber: String): String {
         val phoneNumberUtil = PhoneNumberUtil.getInstance()
