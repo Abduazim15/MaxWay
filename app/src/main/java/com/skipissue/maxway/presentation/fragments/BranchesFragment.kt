@@ -31,6 +31,9 @@ class BranchesFragment : Fragment(R.layout.branches_fragment) {
                 adapter.submitList(data.branches)
             }
         }
+        adapter.setOnClickClickListener { index ->
+            parentFragmentManager.beginTransaction().addToBackStack("BranchesFragment").replace(R.id.container, BranchFragment()).commit()
+        }
     }
     override fun onStart() {
         super.onStart()
