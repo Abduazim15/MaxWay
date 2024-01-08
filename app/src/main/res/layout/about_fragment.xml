@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#F5F5F5"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/sf_pro_display"
+            android:text="Xizmat haqida"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+    </FrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:cardElevation="0px"
+        app:cardCornerRadius="12dp"
+        android:layout_marginHorizontal="12dp"
+        app:layout_constraintTop_toBottomOf="@id/top">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/top">
+
+            <LinearLayout
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="15dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14dp"
+                    android:fontFamily="@font/sf_pro_display"
+                    android:gravity="center"
+                    android:maxWidth="300dp"
+                    android:text="Biz haqimizda"
+                    android:textColor="@color/black" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/next"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="13dp"
+                android:background="?colorSecondary"
+                app:layout_constraintTop_toBottomOf="@id/about"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/public_afford"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="15dp"
+                app:layout_constraintTop_toBottomOf="@id/line1">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14dp"
+                    android:fontFamily="@font/sf_pro_display"
+                    android:gravity="center"
+                    android:maxWidth="300dp"
+                    android:text="Ommaviy oferta"
+                    android:textColor="@color/black" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/next"/>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

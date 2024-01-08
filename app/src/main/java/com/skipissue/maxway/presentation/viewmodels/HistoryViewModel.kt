@@ -45,7 +45,7 @@ class HistoryViewModel @Inject constructor(private val getOrdersUseCase: GetOrde
             is State.Success<*> -> try {
                 _successFlow.emit(state.data as OrderHistoryResponse)
             } catch (e: Exception){
-                _successDFlow.emit(state.data as AboutOrderResponse)
+                 _successDFlow.emit(state.data as AboutOrderResponse)
             }
         }
     }

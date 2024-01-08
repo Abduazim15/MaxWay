@@ -37,6 +37,11 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
                 .addToBackStack("ProfileFragment").replace(R.id.container, BranchesFragment())
                 .commit()
         }
+        binding.about.setOnClickListener {
+            requireParentFragment().parentFragmentManager.beginTransaction().setReorderingAllowed(true)
+                .addToBackStack("ProfileFragment").replace(R.id.container, AboutFragment())
+                .commit()
+        }
     }
     fun formatPhoneNumber(phoneNumber: String): String {
         val phoneNumberUtil = PhoneNumberUtil.getInstance()
