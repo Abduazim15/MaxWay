@@ -3,6 +3,7 @@ package com.skipissue.maxway.presentation.fragments
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -32,9 +33,17 @@ class BranchesFragment : Fragment(R.layout.branches_fragment) {
             }
         }
         adapter.setOnClickClickListener { index ->
-            parentFragmentManager.beginTransaction().addToBackStack("BranchesFragment").replace(R.id.container, BranchFragment()).commit()
+            parentFragmentManager.beginTransaction().addToBackStack("BranchesFragment")
+                .replace(R.id.container, BranchFragment::class.java, bundleOf(
+                    "name" to adapter.currentList[index].address,
+                    "orient" to adapter.currentList[index].destination,
+                    "timeStart" to adapter.currentList[index].work_hour_start,
+                    "timeEnd" to adapter.currentList[index].work_hour_end,
+                    "phone" to adapter.currentList[index].phone,
+                )).commit()
         }
     }
+
     override fun onStart() {
         super.onStart()
         (requireActivity() as MainActivity).hideOrShow(true)
