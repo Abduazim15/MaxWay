@@ -14,8 +14,13 @@ class SettingsFragment: Fragment(R.layout.settings_fragment){
     private val binding: SettingsFragmentBinding by viewBinding()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val bottomsheet = BottomSheet()
-        binding.language.setOnClickListener {
-            bottomsheet.show(parentFragmentManager, "language")
+        binding.apply {
+            language.setOnClickListener {
+                bottomsheet.show(parentFragmentManager, "language")
+            }
+            back.setOnClickListener {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
         }
     }
 
