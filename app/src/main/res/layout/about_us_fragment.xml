@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <FrameLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/sf_pro_display"
+            android:text="Biz haqimizda"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/white_square"
+        android:backgroundTint="@color/white"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/top">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_display"
+                android:text="Biz mijozlarimizni xursand qilamiz"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/sf_pro_display"
+                android:text="Kompaniya 2005 yilning fevral oyida Toshkent shahrida tashkil etilgan. Hozirda kompaniyaning Toshkent shahrida 18 ta filiali mavjud.
+Taomnoma asosan klаb sendvichlari, hot-doglar, burgerlar, lavashlar va donarlardan iborat. Bizning ustuvor yo'nalishlarimiz - ingredientlarning yangiligi va sifati, qo'shimchalarning xilma-xilligi, arzon narxlar va mehmonlarning takliflariga e'tibor.
+Har kuni turli xil odamlar MaxWay-dan buyurtma berishadi. Biz esa tashrif buyuruvchilar sonini ham, filiallar sonini ham oshirishga harakat qilmoqdamiz. Har bir tayyorlangan taom bilan biz o'ziga xos retseptlarning tafsilotlarini aniqlaymiz va sizning sevimli brendingiz bo'lishda davom etish uchun narx va sifatning mukammal muvozanatini qidiramiz.
+Agar siz kutilmaganda biz tomondan yomon xizmat yoki past sifatli pishirilgan taomga duch kelsangiz, bizga @maxwaymasterfood_bot manziliga murojaat qiling. Biz ijobiy va salbiy fikr-mulohazalarni mamnuniyat bilan qabul qilamiz. Mehmonning shikoyati - bu sovg'a, bu tufayli bizda o'sish uchun maqsad bo’ladi."
+                android:textColor="#131313"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
