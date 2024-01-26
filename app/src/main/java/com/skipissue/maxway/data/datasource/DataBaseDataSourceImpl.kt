@@ -26,6 +26,12 @@ class DataBaseDataSourceImpl @Inject constructor(val database: AppDataBase) : Da
             database.databaseDao().delete()}
     }
 
+    override suspend fun deleteById(id: Int) {
+        withContext(Dispatchers.IO){
+            database.databaseDao().deleteById(id)
+        }
+    }
+
     override suspend fun getFromId(id: String): FoodHistoryEntity? {
         return withContext(Dispatchers.IO){database.databaseDao().getFromId(id)}
     }

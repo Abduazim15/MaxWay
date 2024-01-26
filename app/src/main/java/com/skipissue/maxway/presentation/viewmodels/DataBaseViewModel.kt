@@ -56,4 +56,9 @@ class DataBaseViewModel @Inject constructor(private val databaseRepository: Data
             databaseRepository.increaseAmount(id, amount)
         }
     }
+    fun deleteById(id: Int){
+        viewModelScope.launch {
+            databaseRepository.deleteById(id)
+        }
+    }
 }

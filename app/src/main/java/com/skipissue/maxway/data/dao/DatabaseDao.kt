@@ -18,6 +18,8 @@ interface DatabaseDao {
 
     @Query("DELETE FROM basket")
     fun delete()
+    @Query("DELETE FROM basket WHERE foodId = :id")
+    fun deleteById(id: Int)
 
     @Query("UPDATE basket SET quantity = quantity + :incrementAmount WHERE id = :itemId")
     fun increaseAmount(itemId: Int, incrementAmount: Int)

@@ -19,6 +19,8 @@ class BasketAdapter : ListAdapter<FoodHistoryEntity, BasketViewHolder>(Character
     private var onClickListener: ((Int) -> Unit)? = null
     private var onDecClickListener: ((Int, Int) -> Unit)? = null
     private var onIncClickListener: ((Int, Int) -> Unit)? = null
+    private var onListChangedListener: (() -> Unit)? = null
+
     fun setOnClickClickListener(clickListener: (Int) -> Unit) {
         onClickListener = clickListener
     }
@@ -28,7 +30,14 @@ class BasketAdapter : ListAdapter<FoodHistoryEntity, BasketViewHolder>(Character
     fun setOnIncClickClickListener(clickListener: (Int, Int) -> Unit) {
         onIncClickListener = clickListener
     }
+    fun setOnListChangedListener(clickListener: () -> Unit) {
+        onListChangedListener = clickListener
+    }
 
+    override fun submitList(list: MutableList<FoodHistoryEntity>?, commitCallback: Runnable?) {
+        super.submitList(list, commitCallback)
+        onListChangedListener?.invoke()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.basket_item, parent, false)
@@ -61,6 +70,7 @@ class BasketViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?, va
     private val amount: TextView = view.findViewById(R.id.amount)
     private val dec: ImageView = view.findViewById(R.id.dec)
     private val inc: ImageView = view.findViewById(R.id.inc)
+    private val delete: ImageView = view.findViewById(R.id.delete)
     private var quantity = 0
 
     fun bind(food: FoodHistoryEntity) {
@@ -69,15 +79,17 @@ class BasketViewHolder(view: View, val onItemClickListener: ((Int) -> Unit)?, va
         cost.setText(food.price.toString() + " so'm")
         Glide.with(image).load("https://cdn.delever.uz/delever/" + food.imageId).into(image)
         amount.setText(food.quantity.toString())
-        layout.setOnClickListener {
+        delete.setOnClickListener {
             onItemClickListener?.invoke(bindingAdapterPosition)
         }
         dec.setOnClickListener {
             if (quantity > 1) {
                 quantity -= 1
                 amount.setText(quantity.toString())
+                onItemDecClickListener?.invoke(bindingAdapterPosition, quantity)
             }
-            onItemDecClickListener?.invoke(bindingAdapterPosition, quantity)
+            else
+                onItemDecClickListener?.invoke(bindingAdapterPosition, 0)
         }
         inc.setOnClickListener {
             if (quantity < 100) {

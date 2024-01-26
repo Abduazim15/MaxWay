@@ -22,6 +22,10 @@ class DatabaseRepositoryImpl @Inject constructor(val dataSource: DataBaseDataSou
         return dataSource.delete()
     }
 
+    override suspend fun deleteById(id: Int) {
+        return dataSource.deleteById(id)
+    }
+
     override suspend fun getFromId(id: String): FoodHistoryEntity? {
         return dataSource.getFromId(id)
     }
