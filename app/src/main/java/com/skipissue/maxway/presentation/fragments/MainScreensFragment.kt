@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.skipissue.maxway.MainActivity
 import com.skipissue.maxway.R
 import com.skipissue.maxway.data.settings.Settings
@@ -17,16 +19,18 @@ import javax.inject.Inject
 class MainScreensFragment : Fragment(R.layout.viewpager_fragment) {
     private val binding: ViewpagerFragmentBinding by viewBinding()
     private lateinit var adapter: HomeViewPagerAdapter
+    private lateinit var viewPager: ViewPager2
+    private lateinit var bottom: BottomNavigationView
 
     @Inject
     lateinit var settings: Settings
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = HomeViewPagerAdapter(this )
-        val viewPager = binding.viewPager
+        viewPager = binding.viewPager
         if (viewPager.adapter == null)
             binding.viewPager.adapter = adapter
         binding.viewPager.isUserInputEnabled = false
-        val bottom = (requireActivity() as MainActivity).bottom
+        bottom = (requireActivity() as MainActivity).bottom
         bottom.visibility = View.VISIBLE
         viewPager.setCurrentItem(when (bottom.selectedItemId) {
             R.id.main -> 0
@@ -82,5 +86,16 @@ class MainScreensFragment : Fragment(R.layout.viewpager_fragment) {
             }
             return@setOnItemSelectedListener true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewPager.setCurrentItem(when (bottom.selectedItemId) {
+            R.id.main -> 0
+            R.id.basket -> 1
+            R.id.my_orders -> 2
+            R.id.profile -> 3
+            else -> 0
+        }, false)
     }
 }

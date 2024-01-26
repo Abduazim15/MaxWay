@@ -34,6 +34,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
+        android:id="@+id/items"
         android:layout_weight="1">
 
         <LinearLayout
@@ -69,6 +71,22 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:id="@+id/empty"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="100dp"
+            android:src="@drawable/basket_empty"
+            android:layout_height="100dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_display"
+            android:layout_marginTop="10dp"
+            android:text="The basket is empty"/>
+    </LinearLayout>
 
 </LinearLayout>

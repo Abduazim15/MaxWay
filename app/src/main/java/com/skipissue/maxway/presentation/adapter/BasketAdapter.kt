@@ -34,8 +34,8 @@ class BasketAdapter : ListAdapter<FoodHistoryEntity, BasketViewHolder>(Character
         onListChangedListener = clickListener
     }
 
-    override fun submitList(list: MutableList<FoodHistoryEntity>?, commitCallback: Runnable?) {
-        super.submitList(list, commitCallback)
+    override fun submitList(list: MutableList<FoodHistoryEntity>?) {
+        super.submitList(list)
         onListChangedListener?.invoke()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketViewHolder {

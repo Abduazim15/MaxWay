@@ -27,7 +27,8 @@ class BasketFragment : Fragment(R.layout.basket_fragment) {
         viewModel.getAll()
         binding.recycler.adapter = adapter
         viewModel.livedata.observe(viewLifecycleOwner) { data ->
-            adapter.submitList(data)
+            adapter.submitList(data.toMutableList())
+            check(data.isNullOrEmpty())
         }
         adapter.setOnDecClickClickListener { index, quantity ->
             if (quantity > 0)
@@ -38,6 +39,7 @@ class BasketFragment : Fragment(R.layout.basket_fragment) {
                         viewModel.deleteById(adapter.currentList[index].id.toInt())
                         val list = adapter.currentList.toMutableList()
                         list.removeAt(index)
+                        viewModel.getAll()
                         adapter.submitList(list)
                     }
                 }.show()
@@ -52,6 +54,7 @@ class BasketFragment : Fragment(R.layout.basket_fragment) {
                     viewModel.deleteById(adapter.currentList[index].id.toInt())
                     val list = adapter.currentList.toMutableList()
                     list.removeAt(index)
+                    viewModel.getAll()
                     adapter.submitList(list)
                 }
             }.show()
@@ -60,17 +63,20 @@ class BasketFragment : Fragment(R.layout.basket_fragment) {
             DeleteDialog(requireContext()){clicked ->
                 if (clicked){
                     viewModel.delete()
-                    adapter.submitList(emptyList())
+                    viewModel.getAll()
+                    adapter.submitList(emptyList<FoodHistoryEntity>().toMutableList())
                 }
             }.show()
 
         }
-        adapter.setOnListChangedListener {
-            if (adapter.currentList.isNullOrEmpty()){
-
-            } else {
-
-            }
+    }
+    private fun check(boolean: Boolean){
+        if (boolean){
+            binding.empty.visibility = View.VISIBLE
+            binding.items.visibility = View.GONE
+        } else {
+            binding.items.visibility = View.VISIBLE
+            binding.empty.visibility = View.GONE
         }
     }
 
